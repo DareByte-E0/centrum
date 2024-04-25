@@ -1,0 +1,149 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.bold-pink {
+    background-color: #e91e63;
+}
+
+.calming-blue {
+    background-color: #45b3fa;
+}
+
+.warm-orange {
+    background-color: #ffc107;
+}
+
+.soft-green {
+    background-color: #8bc34a;
+}
+
+.bright-yellow {
+    background-color: #f7dc6f;
+}
+
+.rich-purple {
+    background-color: #9c27b0;
+}
+
+.blue-green {
+    background-color: #3f51b5;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 5px;
+}
+
+
+
+.Landing-page {
+    min-height: 1000vh;
+    background-color: #1b2838;
+    color: white;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    font-size: 2rem;
+    padding: 20px;
+}
+
+.header {
+    font-size: 4rem;
+    position:  absolute;
+    top: 0;
+    width: 90%;
+}
+.group {
+    color: #f7dc6f;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    gap: 20%;
+}
+
+.brand {
+    font-size: 1rem;
+}
+
+
+
+
+/*body content */
+
+.body-content {
+    margin: 100px;
+}
+
+.body-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    position: relative;
+
+}
+
+.v1 {
+    text-align: left;
+    border: 0px solid;
+    border-radius: 20px;
+    width: 45%;
+    height: 60%;
+    position: relative;
+    bottom: 60px;
+    color: #45b3fa;
+    box-shadow: 0px 20px 20px rgba(0, 0, 3);
+}
+
+.v1-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.v2-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.v2 {
+    text-align: left;
+    border: 0px solid;
+    width: 45%;
+    height: 80%;
+    border-radius: 20px;
+    color: #45b3fa;
+    box-shadow: 0px 20px 20px rgba(0, 0, 0, 3);
+}
+
+.v3 {
+    text-align: left;
+    border: 0px solid;
+    border-radius: 20px;
+    width: 45%;
+    height: 60%;
+    position: relative;
+    bottom: 250px;
+    color: #45b3fa;
+    box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+.v4 {
+    text-align: right;
+    border: 0px solid;
+    border-radius: 20px;
+    width: 60%;
+    height: 55%;
+    position: absolute;
+    right: 0px;
+    top: 50px;
+    color: #45b3fa;
+    box-shadow: 0px 20px 20px rgba(0, 0, 0, 3);
+}
