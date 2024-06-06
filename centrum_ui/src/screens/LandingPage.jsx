@@ -1,6 +1,6 @@
 import React from 'react';
 import './landing.css'
-
+import Footer from './Footer';
 
 const LandingPage = () => {
     return (
@@ -18,7 +18,7 @@ const LandingPage = () => {
                     <div className='circle bright-yellow'></div>
                    </div>
                 </div>
-                <div className='header'>Centrum</div>
+                <div className='header'>Professor</div>
             </div>
 
             <div className='body-content'>
@@ -54,7 +54,26 @@ const LandingPage = () => {
                     </div>
 
                 </div>
+
+                <div className='footer-content'>
+                    <div className='footer-1'>
+                        from bytes
+                    <img className='footer-img'
+     src={`${process.env.PUBLIC_URL}/images/student-8.jpg`} 
+     alt="students-reading"/>
+                    </div>
+                    <div className='footer-2'>
+                        Our news letter
+                        <form action="" method='post'>
+                            <input type="text" name="name" id="name" placeholder='name' />
+                            <input type="email" name='email' id='email' placeholder='email' />
+                            <button>subscribe</button>
+                        </form>
+                    </div>
+                </div>
             </div>
+            < Footer />
+
         </div>
     )
 }

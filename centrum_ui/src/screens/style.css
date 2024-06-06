@@ -3,14 +3,14 @@
 .navigation-pane {
     width: 20%; /* Adjust width as needed */
     height: 100vh; /* Full height of the viewport */
-    background-color: #f0f0f0; /* Light gray background */
+    background-color: #1b2838; /* Light gray background */
     float: left; /* Float the navigation pane to the left */
   }
   
   .navigation-link {
     display: block;
     padding: 10px;
-    color: #333333;
+    color: #45b3fa;
     text-decoration: none;
   }
   
