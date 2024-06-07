@@ -13,7 +13,7 @@ function App() {
           <Routes>
             <Route path='/' element={ <LandingPage /> } />
             <Route path='/room' element={ <MainLayout /> } />
-            <Route path='/ser' element={ <CustomSearch /> } />
+            
           </Routes>
         </section>
       </Router>
