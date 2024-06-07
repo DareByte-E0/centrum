@@ -26,7 +26,7 @@ const CustomSearch = () => {
 
   return (
     <div className="custom-search-container">
-      <div class="gcse-searchbox-only"></div>
+      <div class="gcse-search"></div>
     </div>
   );
 };
