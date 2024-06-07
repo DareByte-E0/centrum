@@ -20,7 +20,7 @@ const LandingPage = () => {
                     <div className='circle bright-yellow'></div>
                    </div>
                 </div>
-                <div className='header'>Professor</div>
+                <div className='header'>PROFESSOR</div>
             </div>
 
             
