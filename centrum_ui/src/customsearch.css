@@ -1,0 +1,61 @@
+/* CustomSearch.css */
+
+.custom-search-container {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .gcse-searchbox-only {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .gcse-searchresults-only {
+    margin: 20px auto;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  input.gsc-input {
+    box-sizing: border-box !important;
+    height: 40px !important;
+    font-size: 16px !important;
+    padding: 8px 12px !important; /* Add padding for better spacing */
+    width: calc(100% - 100px) !important; /* Adjust width to accommodate the search button */
+    color: #000 !important; /* Ensure text color is visible */
+    background-color: #fff !important; /* Ensure background color is white */
+    border: 1px solid #ccc !important; /* Add border for visibility */
+  }
+  
+  input.gsc-input:focus {
+    outline: none !important;
+    border-color: #4CAF50 !important; /* Change border color on focus */
+  }
+  
+  .gsc-search-button {
+    height: 40px !important; /* Match the height of the input field */
+    /* background-color: #4CAF50 !important; */
+    color: white !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 0 16px !important; /* Padding for button */
+    display: flex;
+    right: 250px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* .gsc-search-button:hover {
+    background-color: #45a049 !important;
+  } */
+  
+  /* Hide the "Enhanced by Google" branding */
+  .gsc-branding {
+    display: none !important;
+  }
+  

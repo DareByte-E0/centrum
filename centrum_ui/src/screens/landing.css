@@ -43,14 +43,14 @@ html, body {
 
 
 .Landing-page {
-    min-height: 1000vh;
+    min-height: 300vh;
     background-color: #1b2838;
     color: white;
     position: absolute;
     top: 0;
     width: 100%;
     font-size: 2rem;
-    padding: 20px;
+    padding: 0px;
 }
 
 .header {
@@ -202,6 +202,7 @@ button {
     position: absolute;
     right: 130px;
     cursor: pointer;
+    margin-top: 2%;
     font-size: 1rem;
     width: 15%;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 1);

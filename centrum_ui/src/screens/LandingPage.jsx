@@ -1,6 +1,8 @@
 import React from 'react';
 import './landing.css'
 import Footer from './Footer';
+import CustomSearch from '../CustomSearch';
+
 
 const LandingPage = () => {
     return (
@@ -21,7 +23,10 @@ const LandingPage = () => {
                 <div className='header'>Professor</div>
             </div>
 
+            
+
             <div className='body-content'>
+            <CustomSearch />
                 <div className='body-container'>
                     <div className='v1'>
                         Achieve Excellence!
