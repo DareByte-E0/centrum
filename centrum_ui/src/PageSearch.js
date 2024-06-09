@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './pageform.css'
 import { FaSearch } from 'react-icons/fa';
+import SidebarNavBar from './screens/SideNavbar';
 
 
 const PageSearch = () => {
@@ -42,20 +43,26 @@ const PageSearch = () => {
   return (
     <div className='search-page-container'>
       <div className='cover'>
-      <form className='search-form' method="get" action="." onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="q"
-        id="search"
-        size="25"
-        ref={searchBoxRef}
-        placeholder={searchText}
-        defaultValue=''
-        onChange={(e) => setSearchText(e.target.value)}
-      />
-      <button type='submit'><FaSearch /></button>
-      {/* <input type="submit" value="Search" /> */}
-    </form>
+        
+        <form className='search-form' method="get" action="." onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="q"
+          id="search"
+          size="25"
+          ref={searchBoxRef}
+          placeholder={searchText}
+          defaultValue=''
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <button type='submit'><FaSearch /></button>
+      </form>
+        
+
+      <div className='side-nav'>
+      <SidebarNavBar/>
+      </div>
+    
       </div>
     </div>
   );
