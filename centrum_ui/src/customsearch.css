@@ -5,7 +5,10 @@
     padding: 10px;
     border: 1px solid #ddd;
   }
-  
+
+.gsc-control-cse {
+    text-align: left;
+}
   .gcse-searchbox-only {
     display: flex;
     justify-content: center;
