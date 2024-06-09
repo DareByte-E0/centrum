@@ -1,4 +1,7 @@
 import React, { useEffect } from 'react';
+import './customsearch.css'
+import PageSearch from './PageSearch';
+import './webresults.css'
 
 const SearchResults = () => {
   useEffect(() => {
@@ -8,16 +11,40 @@ const SearchResults = () => {
     script.async = true;
     document.body.appendChild(script);
 
+    const observerScript = document.createElement('script');
+    observerScript.innerHTML = `
+      document.addEventListener("DOMContentLoaded", function() {
+        const targetNode = document.querySelector('.gsc-results-wrapper-visible');
+        if (targetNode) {
+          const observer = new MutationObserver((mutationsList, observer) => {
+            for (let mutation of mutationsList) {
+              if (mutation.type === 'childList') {
+                document.querySelectorAll('.gsc-webResult').forEach((result) => {
+                  result.classList.add('custom-result');
+                });
+              }
+            }
+          });
+
+          observer.observe(targetNode, { childList: true, subtree: true });
+        }
+      });
+    `;
+    document.body.appendChild(observerScript);
+
     // Cleanup script when the component unmounts
     return () => {
       document.body.removeChild(script);
+      document.body.removeChild(observerScript);
     };
   }, []);
 
   return (
     <div>
-      <h2>Search Results</h2>
-      <div className="gcse-searchresults-only"></div>
+       
+       <PageSearch />
+      <div className="gcse-searchresults-only">
+      </div>
     </div>
   );
 };

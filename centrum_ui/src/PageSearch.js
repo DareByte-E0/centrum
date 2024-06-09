@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './searchform.css'
+import './pageform.css'
+import { FaSearch } from 'react-icons/fa';
 
 
-const CustomSearch = () => {
-  const defaultText = 'Ask the professor...';
+const PageSearch = () => {
+  const defaultText = 'Enter your search';
   const [searchText, setSearchText] = useState(defaultText);
   const searchBoxRef = useRef(null);
 
@@ -33,28 +34,31 @@ const CustomSearch = () => {
     // Redirect to your results page with the query as a parameter
     const query = searchBoxRef.current.value;
     if (query.trim()) {
-      const url = `/result?q=${encodeURIComponent(query)}`;
-      window.open(url, '_blank');
+        const url = `/result?q=${encodeURIComponent(query)}`;
+        window.location.href = url; // Open results page in the same tab
     }
   };
 
   return (
-    <div className='search-container'>
-      <form className='search-form-1' method="get" action="/result" onSubmit={handleSubmit}>
+    <div className='search-page-container'>
+      <div className='cover'>
+      <form className='search-form' method="get" action="." onSubmit={handleSubmit}>
       <input
         type="text"
         name="q"
         id="search"
         size="25"
         ref={searchBoxRef}
-        defaultValue={searchText}
+        placeholder={searchText}
+        defaultValue=''
         onChange={(e) => setSearchText(e.target.value)}
       />
-      <button type='submit'>search</button>
+      <button type='submit'><FaSearch /></button>
       {/* <input type="submit" value="Search" /> */}
     </form>
+      </div>
     </div>
   );
 };
 
-export default CustomSearch;
+export default PageSearch;

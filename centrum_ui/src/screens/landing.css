@@ -182,7 +182,7 @@ html, body {
     border-radius: 30px;
 }
 
-input {
+/* input {
     border: none;
     border-radius: 10px;
     padding: 10px;
@@ -191,9 +191,9 @@ input {
     color: white;
     background-color: inherit;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 1);
-}
+} */
 
-button {
+/* button {
     color: white;
     background-color: inherit;
     border-radius: 10px;
@@ -206,7 +206,7 @@ button {
     font-size: 1rem;
     width: 15%;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 1);
-}
+} */
 
 button:hover {
     transform: scale(1.05);

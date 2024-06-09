@@ -69,11 +69,11 @@ const LandingPage = () => {
                     </div>
                     <div className='footer-2'>
                         Our news letter
-                        <form action="" method='post'>
+                        {/* <form action="" method='post'>
                             <input type="text" name="name" id="name" placeholder='name' />
                             <input type="email" name='email' id='email' placeholder='email' />
                             <button>subscribe</button>
-                        </form>
+                        </form> */}
                     </div>
                 </div>
             </div>
