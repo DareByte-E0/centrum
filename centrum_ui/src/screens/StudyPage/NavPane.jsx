@@ -1,6 +1,6 @@
 // NavigationPane.js
 import React from 'react';
-import './style.css'; // Import CSS file
+import './style.css';
 
 const NavigationPane = () => {
   return (

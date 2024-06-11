@@ -1,0 +1,23 @@
+#font-s {
+    font-size: 1.2rem;
+}
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #1b2838;
+}
+
+  /* Footer.css */
+.footer {
+    background-color: #333333; 
+    color: #ffffff; 
+    text-align: center; 
+    padding: 20px;  
+    font-size: 1rem; 
+}
+
+.logo-img {
+    width: 10%;
+    height: 10%;
+    border-radius: 50px;
+}

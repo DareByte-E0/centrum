@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Offcanvas } from 'react-bootstrap';
 import { FaBars } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; // Import Link from React Router
+import { Link } from 'react-router-dom'; 
 
 const SidebarNavBar = () => {
     const [showSidebar, setShowSidebar] = useState(false);

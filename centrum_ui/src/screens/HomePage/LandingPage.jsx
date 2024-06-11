@@ -1,9 +1,9 @@
 import React from 'react';
 import './landing.css';
-import Footer from './Footer';
-import CustomSearch from '../CustomSearch';
-import CollapsibleNavBar from './CollpasibleNabar';
-import SidebarNavBar from './SideNavbar';
+import Footer from '../Navigation/Footer';
+import CustomSearch from './CustomSearch';
+import CollapsibleNavBar from '../Navigation/CollpasibleNabar';
+
 
 const LandingPage = () => {
     return (

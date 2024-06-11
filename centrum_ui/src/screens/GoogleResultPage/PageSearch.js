@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './pageform.css'
 import { FaSearch } from 'react-icons/fa';
-import SidebarNavBar from './screens/SideNavbar';
+import SidebarNavBar from '../Navigation/SideNavbar';
 
 
 const PageSearch = () => {

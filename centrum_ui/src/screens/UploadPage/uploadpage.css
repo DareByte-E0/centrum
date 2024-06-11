@@ -1,0 +1,42 @@
+
+.upload-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #1b2838;
+    color: white;
+    position: relative;
+    width: 100%;
+    font-size: 2rem;
+    padding: 0px;
+}
+
+.brand-circle {
+    position: absolute;
+    margin: 10px;
+    margin-top: 100px;
+    color: #f7dc6f;
+}
+
+.upload {
+    width: 80%;
+    margin: auto;
+    margin-top: 200px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.upload .upload-item1 p {
+    font-size: 1rem;
+    color: #f7dc6f;
+}
+
+.upload .upload-item1 h2 {
+    font-weight: bold;
+}
+
+.footer-s {
+   margin-top: auto;
+}

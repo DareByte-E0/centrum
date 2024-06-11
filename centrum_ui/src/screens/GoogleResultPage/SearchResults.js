@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import './customsearch.css'
 import PageSearch from './PageSearch';
 import './webresults.css'
-import CollapsibleNavBar from './screens/CollpasibleNabar';
 
 const SearchResults = () => {
   useEffect(() => {

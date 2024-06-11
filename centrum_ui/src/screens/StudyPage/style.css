@@ -1,0 +1,41 @@
+/* NavigationPane.css */
+/* NavigationPane.css */
+.navigation-pane {
+    width: 20%; 
+    height: 100vh; 
+    background-color: #1b2838; 
+    float: left; 
+  }
+  
+  .navigation-link {
+    display: block;
+    padding: 10px;
+    color: #45b3fa;
+    text-decoration: none;
+  }
+  
+  .navigation-link:hover {
+    background-color: #dddddd;
+  }
+  
+  
+  /* MainScreen.css */
+  .main-screen {
+    width: 80%; 
+    height: 100vh; 
+    background-color: #ffffff; 
+    overflow-y: auto; 
+    float: left; 
+  }
+  
+  /* TopPane.css */
+  .top-pane {
+    width: 100%; 
+    height: 50px; 
+    background-color: #333333; 
+    color: #ffffff; 
+    text-align: right; 
+    padding: 10px; 
+  }
+
+  

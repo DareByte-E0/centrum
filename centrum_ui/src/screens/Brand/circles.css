@@ -1,0 +1,39 @@
+.bold-pink {
+    background-color: #e91e63;
+}
+
+.calming-blue {
+    background-color: #45b3fa;
+}
+
+.warm-orange {
+    background-color: #ffc107;
+}
+
+.soft-green {
+    background-color: #8bc34a;
+}
+
+.bright-yellow {
+    background-color: #f7dc6f;
+}
+
+.rich-purple {
+    background-color: #9c27b0;
+}
+
+.blue-green {
+    background-color: #3f51b5;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 5px;
+}
+
+.brand {
+    font-size: 1rem;
+}

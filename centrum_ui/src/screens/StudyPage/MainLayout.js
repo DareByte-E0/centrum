@@ -1,9 +1,9 @@
 // MainLayout.js
 import React from 'react';
-import NavigationPane from './screens/NavPane';
-import MainScreen from './screens/MainScreen';
-import TopPane from './screens/TopPane';
-import Footer from './screens/Footer';
+import NavigationPane from './NavPane';
+import MainScreen from './MainScreen';
+import TopPane from './TopPane';
+import Footer from '../Footer';
 
 const MainLayout = () => {
   return (
