@@ -28,18 +28,18 @@ const LandingPage = () => {
             <div className='body-content'>
                 <CustomSearch />
                 <div className='body-container'>
-                    <div className='v1'>
+                    <div className='v'>
                         <p>Achieve Excellence!</p>
                         <img
-                            className='v1-img'
+                            className='v-img'
                             src={`${process.env.PUBLIC_URL}/images/student-1.jpg`}
                             alt="students-reading"
                         />
                     </div>
-                    <div className='v2'>
-                        <p>Connect with the Community!</p>
+                    <div className='v'>
+                        <p>Connect!</p>
                         <img
-                            className='v2-img'
+                            className='v-img'
                             src={`${process.env.PUBLIC_URL}/images/student-6.jpg`}
                             alt="students-reading"
                         />
@@ -47,19 +47,19 @@ const LandingPage = () => {
                 </div>
 
                 <div className='body-container'>
-                    <div className='v3'>
+                    <div className='v'>
                         <p>Study from anywhere!</p>
                         <img
-                            className='v1-img'
+                            className='v-img'
                             src={`${process.env.PUBLIC_URL}/images/student-3.jpg`}
                             alt="students-reading"
                         />
                     </div>
 
-                    <div className='v4'>
+                    <div className='v'>
                         <p>Reading made-easy!</p>
                         <img
-                            className='v2-img'
+                            className='v-img'
                             src={`${process.env.PUBLIC_URL}/images/student-4.jpg`}
                             alt="students-reading"
                         />
@@ -68,12 +68,13 @@ const LandingPage = () => {
 
                 <div className='footer-content'>
                     <div className='footer-1'>
-                        from bytes
-                        <img
-                            className='footer-img'
-                            src={`${process.env.PUBLIC_URL}/images/student-8.jpg`}
-                            alt="students-reading"
-                        />
+                        <p>Professor</p>
+                        <video
+                    className="footer-video"
+                    src={`${process.env.PUBLIC_URL}/animate/prof-gif2.mp4`}
+                    alt="students-reading"
+                    controls
+                ></video>
                     </div>
                     <div className='footer-2'>
                         Our news letter

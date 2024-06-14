@@ -3,7 +3,9 @@ import './uploadpage.css'
 import CollapsibleNavBar from '../Navigation/CollpasibleNabar';
 import Circles from '../Brand/Circles';
 import Portal from './Portal';
+import FeatureList from './FeatureList';
 import Footer from '../Navigation/Footer';
+import Testimonials from './Testimonial';
 
 
 const UploadPage = () => {
@@ -24,6 +26,12 @@ const UploadPage = () => {
                 </div>
             </div>
 
+            <div className='feature-section'>
+                <FeatureList />
+            </div>
+            <div className='testimonial-section'>
+            <Testimonials />
+            </div>
             
 
 

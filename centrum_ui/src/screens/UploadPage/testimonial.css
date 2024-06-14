@@ -1,0 +1,30 @@
+.testimonials {
+    margin: 20px 0;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+/* .testimonials h3 {
+    color: #333;
+} */
+
+.testimonial {
+    /* background-color: #f9f9f9; */
+    border: 0px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 700px;
+    font-size: 1.5rem;
+}
+
+.testimonial .quote {
+    font-style: italic;
+    margin-bottom: 10px;
+    color:antiquewhite;
+    color: #f7dc6f;
+}
+
+/* .testimonial .author {
+    font-weight: bold;
+} */

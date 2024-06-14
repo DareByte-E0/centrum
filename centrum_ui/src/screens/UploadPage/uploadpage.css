@@ -37,6 +37,23 @@
     font-weight: bold;
 }
 
+
+.feature-section {
+    width: 90%;
+    margin: auto;
+    color:#f7dc6f;
+    /* color: black; */
+    padding: 10px;
+    /* background-color: #F8F9FA;
+    background-color: gray; */
+}
+
+
+.testimonial-section {
+    margin: 50px;
+}
+
 .footer-s {
    margin-top: auto;
 }
+
