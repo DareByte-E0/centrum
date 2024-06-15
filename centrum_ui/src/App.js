@@ -3,6 +3,7 @@ import './App.css';
 import LandingPage from './screens/HomePage/LandingPage';
 import SearchResults from './screens/GoogleResultPage/SearchResults';
 import UploadPage from './screens/UploadPage/UploadPage';
+import ShelvePage from './screens/ShelvePage/ShelvePage';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
             <Route path='/' element={ <LandingPage /> } />
             <Route path='/upload' element={ <UploadPage /> } />
             <Route path='/result' element={ <SearchResults /> } />
+            <Route path='/shelf' element={ <ShelvePage /> } />
           </Routes>
         </section>
       </Router>
