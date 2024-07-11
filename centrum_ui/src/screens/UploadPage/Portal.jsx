@@ -6,11 +6,15 @@ import { IoCloseCircleOutline } from 'react-icons/io5';
 import axios from 'axios';
 import API_URL from '../../Config';
 import FileUploadLoader from '../Loaders/FileUploadLoader';
+import UploadSuccess from '../SnackBar/UploadSuccess';
+import UploadFail from '../SnackBar/UploadFail';
 
 const Portal = () => {
   const { getRootProps, getInputProps } = useDropzone();
   const [files, setFiles] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false); 
+  const [uploadFail, setUploadFail] = React.useState(false);
+  const [uploadSuccess, setUploadSuccess] = React.useState(false);
 
   const handleFileChange = (event) => {
     const newFiles = Array.from(event.target.files);
@@ -34,15 +38,15 @@ const Portal = () => {
     try {
       const req = await axios.post(`${API_URL}/upload_files`, formData);
       setFiles([]);
-      console.log(req)
-
+      console.log(req);
+      setUploadSuccess(true);
     } catch(error) {
+      setUploadFail(true);
       console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
-
 
   return (
     <Box
@@ -51,10 +55,13 @@ const Portal = () => {
         padding: 4,
         borderRadius: 2,
         textAlign: 'center',
-        position: 'relative', // Ensure the container is relative for absolute positioning of LoadingComponent
+        position: 'relative',
       }}
     >
       {/* Upload Box */}
+      <UploadFail open={uploadFail} onClose={() => setUploadFail(false)} />
+      <UploadSuccess open={uploadSuccess} onClose={() => setUploadSuccess(false)} />
+      
       {!isLoading && (
         <>
           <Box {...getRootProps()} sx={{ cursor: 'pointer', marginBottom: 2 }}>

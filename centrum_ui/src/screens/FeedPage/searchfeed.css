@@ -1,0 +1,33 @@
+/* SearchComponent.css */
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+  }
+  
+  .search-icons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-icon, .clear-icon {
+    cursor: pointer;
+    margin-left: 5px;
+    color: #888;
+  }
+  
+  .search-icon:hover, .clear-icon:hover {
+    color: #000;
+  }
+  

@@ -12,6 +12,7 @@ const CollapsibleNavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav id='font-s' className="ms-auto">
                         <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/feed">feed</Nav.Link>
                         <Nav.Link href="/upload"> <FaUpload size={15} color="blue" /> upload</Nav.Link>
                         <Nav.Link href="/shelf">shelf</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
