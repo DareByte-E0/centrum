@@ -20,11 +20,17 @@ class FileController {
                 thumbnailPath = await ThumbnailController.generateVideoThumbnail(file);
             } else if (file.mimetype.startsWith('image')) {
                 thumbnailPath = await ThumbnailController.generateImageThumbnail(file);
+            } else if (file.mimetype.startsWith('application')) {
+                console.log('yo')
+                thumbnailPath = await ThumbnailController.generateApplicationThumbnail(file);
             }
+
+            const mainType = file.mimetype.split('/')[0];
 
             return {
                 path: file.path,
                 originalName: file.originalname,
+                type: mainType,
                 thumbnailPath: thumbnailPath || null,
             };
 	    }));

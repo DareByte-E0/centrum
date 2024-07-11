@@ -1,6 +1,8 @@
 const ffmpeg = require('fluent-ffmpeg');
 const path = require('path');
 const Jimp = require('jimp');
+const pdf = require('pdf-thumbnail');
+const fs = require('fs')
 
 class ThumbnailController {
     static generateVideoThumbnail(file) {
@@ -28,6 +30,22 @@ class ThumbnailController {
                 .resize(256, Jimp.AUTO)
                 .quality(60)
                 .writeAsync(thumbnailPath);
+            return thumbnailPath;
+        } catch (err) {
+            console.error(err);
+            return null;
+        }
+    }
+
+    static async generateApplicationThumbnail(file) {
+        try {
+            const thumbnailPath = path.join('uploads/thumbnails', `${path.parse(file.filename).name}-thumbapp.jpg`);
+            const pdfBuffer = fs.readFileSync(file.path);
+            const options = {
+                width: 200,
+                height: 200
+            };
+            await pdf(pdfBuffer, options, thumbnailPath);
             return thumbnailPath;
         } catch (err) {
             console.error(err);

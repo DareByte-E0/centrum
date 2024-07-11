@@ -14,6 +14,11 @@ const fileSchema = new mongoose.Schema({
     thumbnailPath: {
         type: String,
     },
+
+    type: {
+        type: String,
+        required: true
+    },
     
 }, { timestamps: true });
 
