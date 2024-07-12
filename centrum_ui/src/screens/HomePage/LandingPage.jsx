@@ -3,9 +3,22 @@ import './landing.css';
 import Footer from '../Navigation/Footer';
 import CustomSearch from './CustomSearch';
 import CollapsibleNavBar from '../Navigation/CollpasibleNabar';
-
+import ChatButton from '../GptChatInterface/ChatButton';
+import ChatDialog from '../GptChatInterface/ChatDialog';
 
 const LandingPage = () => {
+
+    const [isChatOpen, setIsChatOpen] = React.useState(false);
+
+    const handleChatClick = () => {
+        setIsChatOpen(true);
+    };
+
+    const handleCloseChat = () => {
+        setIsChatOpen(false);
+    };
+
+
     return (
         <div className='Landing-page'>
             <CollapsibleNavBar />
@@ -28,6 +41,10 @@ const LandingPage = () => {
             <div className='body-content'>
                 <CustomSearch />
                 <div className='body-container'>
+
+                <ChatButton onClick={handleChatClick} />
+                <ChatDialog isOpen={isChatOpen} onClose={handleCloseChat} />
+
                     <div className='v'>
                         <p>Achieve Excellence!</p>
                         <img

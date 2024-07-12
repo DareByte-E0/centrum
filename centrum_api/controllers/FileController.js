@@ -21,7 +21,6 @@ class FileController {
             } else if (file.mimetype.startsWith('image')) {
                 thumbnailPath = await ThumbnailController.generateImageThumbnail(file);
             } else if (file.mimetype.startsWith('application')) {
-                console.log('yo')
                 thumbnailPath = await ThumbnailController.generateApplicationThumbnail(file);
             }
 
@@ -47,15 +46,22 @@ class FileController {
 
 
 
-
     static async getFiles(req, res) {
-        try {
-            const files = await File.find().lean();
-            res.status(200).json({files});
-        } catch (error) {
-            res.status(500).json({ error: error.message });
+        const { search } = req.query;
+    
+        const query = {};
+        if (search) {
+        query.originalName = { $regex: search, $options: 'i' };
         }
-    }
+    
+        try {
+        const files = await File.find(query);
+        res.json({ files });
+        } catch (error) {
+        res.status(500).json({'error' : 'Internal server error'});
+        }
+    };
 }
+  
 
 module.exports = FileController;

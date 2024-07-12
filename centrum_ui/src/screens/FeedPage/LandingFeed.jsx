@@ -4,8 +4,7 @@ import Circles from '../Brand/Circles';
 import './landingfeed.css'
 import Feed from './Feed';
 import CollapsibleNavBar from '../Navigation/CollpasibleNabar';
-import SearchFeed from './SearchFeed';
-import SearchDialog from './SearchDialog';
+
 
 const LandingFeed = () => {
     return (
@@ -13,11 +12,7 @@ const LandingFeed = () => {
              <CollapsibleNavBar />
              <div className='brand-circle'>
                  <Circles />
-                 <SearchFeed />
-             </div>
-
-             <div>
-                <SearchDialog />
+                
              </div>
 
              <div className='feed'>

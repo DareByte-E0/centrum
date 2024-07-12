@@ -78,3 +78,12 @@ Once you have installed FFmpeg, updated the `fluent-ffmpeg` configuration (if ne
 By following these steps, you should be able to resolve the "Cannot find ffmpeg" error and successfully use `fluent-ffmpeg` for operations like video thumbnail generation in your Node.js application.
 
 NB: if the version is shown of the `ffmpeg --version` its added to path already.
+
+
+
+### You must install imageMagick on your machine
+
+```
+sudo apt-get update
+sudo apt-get install imagemagick
+```

@@ -1,8 +1,7 @@
 const ffmpeg = require('fluent-ffmpeg');
 const path = require('path');
 const Jimp = require('jimp');
-const pdf = require('pdf-thumbnail');
-const fs = require('fs')
+const { exec } = require('child_process');
 
 class ThumbnailController {
     static generateVideoThumbnail(file) {
@@ -39,18 +38,36 @@ class ThumbnailController {
 
     static async generateApplicationThumbnail(file) {
         try {
-            const thumbnailPath = path.join('uploads/thumbnails', `${path.parse(file.filename).name}-thumbapp.jpg`);
-            const pdfBuffer = fs.readFileSync(file.path);
-            const options = {
-                width: 200,
-                height: 200
-            };
-            await pdf(pdfBuffer, options, thumbnailPath);
+            const thumbnailPath = path.join('uploads/thumbnails', `${path.parse(file.filename).name}-thumb.jpg`);
+            
+            
+            if (file.mimetype === 'application/pdf') {
+                await ThumbnailController.generatePDFThumbnail(file.path, thumbnailPath);
+            } else {
+                
+                throw new Error('Unsupported file type for thumbnail generation');
+            }
+            
             return thumbnailPath;
         } catch (err) {
-            console.error(err);
+            console.error('Error generating application thumbnail:', err);
             return null;
         }
+    }
+
+
+
+
+    static generatePDFThumbnail(inputPath, outputPath) {
+        return new Promise((resolve, reject) => {
+            const command = `convert -thumbnail x256 "${inputPath}[0]" "${outputPath}"`;
+            exec(command, (error) => {
+                if (error) {
+                    return reject(error);
+                }
+                resolve(outputPath);
+            });
+        });
     }
 
 }

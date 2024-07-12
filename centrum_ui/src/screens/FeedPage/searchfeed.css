@@ -1,5 +1,5 @@
 /* SearchComponent.css */
-.search-container {
+.search-container-feed {
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
@@ -9,25 +9,25 @@
     margin: 0 auto;
   }
   
-  .search-input {
+  .search-container-feed .search-input {
     flex: 1;
     border: none;
     outline: none;
     font-size: 16px;
   }
   
-  .search-icons {
+  .search-container-feed .search-icons {
     display: flex;
     align-items: center;
   }
   
-  .search-icon, .clear-icon {
+  .search-container-feed .search-icon, .clear-icon {
     cursor: pointer;
     margin-left: 5px;
     color: #888;
   }
   
-  .search-icon:hover, .clear-icon:hover {
+  .search-container-feed .search-icon:hover, .clear-icon:hover {
     color: #000;
   }
   

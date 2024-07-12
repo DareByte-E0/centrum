@@ -1,4 +1,3 @@
-// SearchDialog.js
 import React, { useState } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from '@mui/material';
 import { FaSearch } from 'react-icons/fa';
@@ -18,6 +17,12 @@ const SearchDialog = ({ onSearch }) => {
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   const handleSearch = () => {
@@ -50,6 +55,7 @@ const SearchDialog = ({ onSearch }) => {
             fullWidth
             value={searchTerm}
             onChange={handleSearchChange}
+            onKeyPress={handleKeyPress}
           />
         </DialogContent>
         <DialogActions>

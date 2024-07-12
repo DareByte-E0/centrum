@@ -83,18 +83,49 @@ const FeedItem = ({ item }) => {
 
 
       {item.type === 'application' && (
-        <CardContent sx={{
+        <Card sx={{
           boxShadow: 3,
-          borderRadius: 8,
-          padding: 2,
-          transition: 'box-shadow 0.3s ease-in-out', // Optional: Add transition for box-shadow
+          borderRadius: 2,
+          transition: 'box-shadow 0.3s ease-in-out',
           '&:hover': {
-            boxShadow: 9, // Optional: Increase box-shadow on hover
+            boxShadow: 9,
           },
+          maxWidth: 345, // Set a max-width for the card
+          margin: 'auto', // Center the card horizontally
         }}>
-          <Typography variant="body1">{item.originalName}</Typography>
-        </CardContent>
+          <CardMedia
+            component="img"
+            image={`${API_URL}/${item.thumbnailPath}`}
+            alt={item.originalName}
+            sx={{
+              height: 200,
+              objectFit: 'none',
+              borderRadius: '8px 8px 0 0',
+              transition: 'transform 0.3s ease-in-out',
+              '&:hover': {
+                transform: 'scale(1.05)',
+              },
+            }}
+          />
+          <CardContent sx={{
+            padding: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: '#f5f5f5', // Light grey background
+          }}>
+            <Typography variant="body1" sx={{ 
+              fontWeight: 'bold', 
+              textAlign: 'center',
+              marginBottom: 1,
+            }}>
+              {item.originalName}
+            </Typography>
+          </CardContent>
+        </Card>
       )}
+      
+      
     </Card>
   );
 };
