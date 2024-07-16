@@ -53,7 +53,7 @@ const FeedItem = ({ item }) => {
             sx={{ maxHeight: 300, 
               height: 'auto', 
               padding: 1.2, 
-              objectFit: 'fill',
+              objectFit: 'none',
               borderRadius: 8, 
               transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.05)' } }}
           />
