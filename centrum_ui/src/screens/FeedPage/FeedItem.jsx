@@ -1,12 +1,19 @@
 import React from 'react';
-import { Card, CardContent, Typography, CardMedia, Box } from '@mui/material';
+import { Card, CardContent, Typography, CardMedia, Box, Button } from '@mui/material';
 import ReactPlayer from 'react-player';
 import { styled } from '@mui/system';
 import API_URL from '../../Config';
+import { useNavigate } from 'react-router-dom';
 
 const FeedItem = ({ item }) => {
 
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const navigate = useNavigate();
+
+  const handleOpen = () => {
+    window.location.href = `${API_URL}/${encodeURIComponent(item.path)}`;
+  };
+
 
   const StyledReactPlayer = styled(ReactPlayer)({
     cursor: 'pointer',
@@ -90,8 +97,8 @@ const FeedItem = ({ item }) => {
           '&:hover': {
             boxShadow: 9,
           },
-          maxWidth: 345, // Set a max-width for the card
-          margin: 'auto', // Center the card horizontally
+          maxWidth: 345,
+          margin: 'auto',
         }}>
           <CardMedia
             component="img"
@@ -112,7 +119,7 @@ const FeedItem = ({ item }) => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#f5f5f5', // Light grey background
+            backgroundColor: '#f5f5f5',
           }}>
             <Typography variant="body1" sx={{ 
               fontWeight: 'bold', 
@@ -121,6 +128,9 @@ const FeedItem = ({ item }) => {
             }}>
               {item.originalName}
             </Typography>
+            <Button variant="contained" color="primary" onClick={handleOpen}>
+            Open Document
+          </Button>
           </CardContent>
         </Card>
       )}

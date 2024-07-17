@@ -2,6 +2,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const path = require('path');
 const Jimp = require('jimp');
 const { exec } = require('child_process');
+const fs = require('fs')
 
 class ThumbnailController {
     static generateVideoThumbnail(file) {
@@ -40,7 +41,12 @@ class ThumbnailController {
         try {
             const thumbnailPath = path.join('uploads/thumbnails', `${path.parse(file.filename).name}-thumb.jpg`);
             
-            
+            const thumbnailsDir = path.join('uploads', 'thumbnails');
+
+            if (!fs.existsSync(thumbnailsDir)) {
+                fs.mkdirSync(thumbnailsDir, { recursive: true });
+            }
+
             if (file.mimetype === 'application/pdf') {
                 await ThumbnailController.generatePDFThumbnail(file.path, thumbnailPath);
             } else {

@@ -10,7 +10,24 @@ const app = express()
 
 app.use(cors());
 app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+  setHeaders: (res, path) => {
+      const mimeType = {
+          '.pdf': 'application/pdf',
+          '.doc': 'application/msword',
+          '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          // add other MIME types as needed
+      };
+      const ext = path.substring(path.lastIndexOf('.'));
+      if (mimeType[ext]) {
+          res.setHeader('Content-Type', mimeType[ext]);
+      }
+  }
+}));
+
+
 app.use('/', router)
 
 connectDB();

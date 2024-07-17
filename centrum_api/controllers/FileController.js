@@ -61,6 +61,22 @@ class FileController {
         res.status(500).json({'error' : 'Internal server error'});
         }
     };
+
+
+
+    static async read_file(req, res) {
+        const filePath = path.join(uploadDir, req.params.filename);
+
+        var stream = fs.createReadStream(filePath);
+        var filename = req.params.filename; 
+
+        filename = encodeURIComponent(filename);
+      
+        res.setHeader('Content-disposition', 'inline; filename="' + filename + '"');
+        res.setHeader('Content-type', 'application/pdf');
+      
+        stream.pipe(res);
+    }
 }
   
 
