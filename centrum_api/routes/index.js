@@ -12,6 +12,7 @@ router.get('/bebe', AppController.bebe);
 router.get('/read', AppController.read_file);
 router.post('/upload_files', upload.array("files"), FileController.uploadFlies)
 router.get('/files', FileController.getFiles);
-router.get('/files/:filename', FileController.read_file);
+router.get('/files/:id', FileController.read_file);
+
 
 module.exports = router;

@@ -2,6 +2,7 @@ const File = require('../models/Files')
 const ThumbnailController = require('./ThumbnailController')
 const path = require('path');
 const fs = require('fs');
+const { ObjectId } = require('mongodb');
 
 
 
@@ -65,18 +66,47 @@ class FileController {
 
 
     static async read_file(req, res) {
-        const filePath = path.join(uploadDir, req.params.filename);
+        try {
+            const id = req.params.id;
+            const fileDetails = await FileController.getFileDetailsById(id);
+            console.log(fileDetails)
+    
+            if (!fileDetails) {
+                return res.status(404).send('File not found');
+            }
 
-        var stream = fs.createReadStream(filePath);
-        var filename = req.params.filename; 
+            const filename = path.basename(fileDetails.path);
+            const filePath = path.join(uploadDir, filename);
+            console.log(filePath)
+    
+            if (!fs.existsSync(filePath)) {
+                return res.status(404).send('File not found');
+            }
 
-        filename = encodeURIComponent(filename);
-      
-        res.setHeader('Content-disposition', 'inline; filename="' + filename + '"');
-        res.setHeader('Content-type', 'application/pdf');
-      
-        stream.pipe(res);
+            var stream = fs.createReadStream(filePath);
+            var originalName = fileDetails.originalName;
+
+            originalName = encodeURIComponent(originalName);
+
+            res.setHeader('Content-disposition', 'inline; filename="' + originalName + '"');
+            res.setHeader('Content-type', 'application/pdf');
+
+            stream.pipe(res);
+        } catch(error) {
+            console.log(error)
+        }
     }
+
+    static async getFileDetailsById(id) {
+        try {
+            const fileDetails = await File.findOne({ _id: new ObjectId(id) });
+    
+            return fileDetails;
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
 }
   
 

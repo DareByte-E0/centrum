@@ -10,8 +10,8 @@ const FeedItem = ({ item }) => {
   const [isPlaying, setIsPlaying] = React.useState(false);
   const navigate = useNavigate();
 
-  const handleOpen = () => {
-    window.location.href = `${API_URL}/${encodeURIComponent(item.path)}`;
+  const handleOpen = (id) => {
+    navigate('/study', {state: { documentId: id}});
   };
 
 
@@ -128,7 +128,7 @@ const FeedItem = ({ item }) => {
             }}>
               {item.originalName}
             </Typography>
-            <Button variant="contained" color="primary" onClick={handleOpen}>
+            <Button variant="contained" color="primary" onClick={ () => handleOpen(item._id) }>
             Open Document
           </Button>
           </CardContent>

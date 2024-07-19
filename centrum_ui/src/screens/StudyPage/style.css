@@ -1,5 +1,15 @@
 /* NavigationPane.css */
 /* NavigationPane.css */
+
+
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+}
+
+
 .navigation-pane {
     width: 20%; 
     height: 100vh; 
@@ -38,4 +48,6 @@
     padding: 10px; 
   }
 
-  
+  .footer-s {
+    margin-top: auto;
+ }
