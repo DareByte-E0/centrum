@@ -87,3 +87,16 @@ NB: if the version is shown of the `ffmpeg --version` its added to path already.
 sudo apt-get update
 sudo apt-get install imagemagick
 ```
+
+### You must install libreoffice on your machine
+
+```
+sudo apt update
+sudo apt install libreoffice
+
+
+## Supported document MIME Types and their corresponding extensions:
+* PDF: application/pdf
+* DOCX: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+* PPTX: application/vnd.openxmlformats-officedocument.presentationml.presentation
+* XLSX: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet

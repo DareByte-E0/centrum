@@ -1,8 +1,14 @@
 const File = require('../models/Files')
 const ThumbnailController = require('./ThumbnailController')
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs')
 const { ObjectId } = require('mongodb');
+const mime = require('mime-types');
+const libre = require('libreoffice-convert');
+
+
+
+libre.convertAsync = require('util').promisify(libre.convert);
 
 
 
@@ -88,8 +94,19 @@ class FileController {
 
             originalName = encodeURIComponent(originalName);
 
+            const extension = path.extname(originalName);
+            console.log(`File extension: ${extension}`);
+
+            let mimeType = mime.lookup(extension);
+            console.log(`MIME type: ${mimeType}`);
+
+            if (!mimeType) {
+                console.log(`Could not determine MIME type for file: ${filePath}`);
+                mimeType = 'application/octet-stream';
+            }
+
             res.setHeader('Content-disposition', 'inline; filename="' + originalName + '"');
-            res.setHeader('Content-type', 'application/pdf');
+            res.setHeader('Content-type', mimeType);
 
             stream.pipe(res);
         } catch(error) {
