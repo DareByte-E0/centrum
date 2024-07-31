@@ -19,9 +19,7 @@ const LandingFeed = () => {
                 <Feed />
              </div>
              
-             <div className='footer-s'>
-              <Footer />
-             </div>
+             
         </div>
      )
 }

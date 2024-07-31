@@ -8,3 +8,22 @@
     align-items: flex-start;
     gap: 20px;
 }
+
+
+
+@media (max-width: 600px) {
+    .filter {
+        position: absolute;
+        left: 20px;
+        top: 160px;
+        right: 100px;
+    }
+
+    .css-0 {
+        top: 250px;
+        position: relative;
+        right: 100%;
+        width: 99vw;
+    }
+  }
+  

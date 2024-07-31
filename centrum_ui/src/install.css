@@ -1,0 +1,15 @@
+
+.install {
+    color: black;
+    position: relative;
+    top: 100px;
+    z-index: 100;
+}
+
+#install {
+    background-color: #8bc34a;
+    color: blueviolet;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}

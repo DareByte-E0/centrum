@@ -1,16 +1,13 @@
-const File = require('../models/Files')
-const ThumbnailController = require('./ThumbnailController')
+const File = require('../models/Files');
+const ThumbnailController = require('./ThumbnailController');
 const path = require('path');
-const fs = require('fs')
+const fs = require('fs');
 const { ObjectId } = require('mongodb');
 const mime = require('mime-types');
 const libre = require('libreoffice-convert');
+const util = require('util');
 
-
-
-libre.convertAsync = require('util').promisify(libre.convert);
-
-
+libre.convertAsync = util.promisify(libre.convert);
 
 const uploadDir = path.join(__dirname, '../uploads');
 if (!fs.existsSync(uploadDir)) {
@@ -18,80 +15,97 @@ if (!fs.existsSync(uploadDir)) {
 }
 
 class FileController {
-    static async uploadFlies(req, res) {
-      try {
-          const files = await Promise.all(req.files.map(async (file) => {
-            let thumbnailPath;
+    static async uploadFiles(req, res) {
+        try {
+            const files = await Promise.all(req.files.map(async (file) => {
+                let thumbnailPath;
+                let pdfPath;
 
-            if (file.mimetype.startsWith('video')) {
-                thumbnailPath = await ThumbnailController.generateVideoThumbnail(file);
-            } else if (file.mimetype.startsWith('image')) {
-                thumbnailPath = await ThumbnailController.generateImageThumbnail(file);
-            } else if (file.mimetype.startsWith('application')) {
-                thumbnailPath = await ThumbnailController.generateApplicationThumbnail(file);
-            }
+                
+                if (file.mimetype.startsWith('video')) {
+                    thumbnailPath = await ThumbnailController.generateVideoThumbnail(file);
+                } else if (file.mimetype.startsWith('image')) {
+                    thumbnailPath = await ThumbnailController.generateImageThumbnail(file);
+                } else if (file.mimetype.startsWith('application')) {
+                    console.log(`generating thumbnail....`)
+                    thumbnailPath = await ThumbnailController.generateApplicationThumbnail(file);
+                }
 
-            const mainType = file.mimetype.split('/')[0];
+                const mainType = file.mimetype.split('/')[0];
 
-            return {
-                path: file.path,
-                originalName: file.originalname,
-                type: mainType,
-                thumbnailPath: thumbnailPath || null,
-            };
-	    }));
+                
+                if (!file.mimetype.startsWith('application/pdf')) {
+                    const fileNameWithoutExt = path.basename(file.originalname, path.extname(file.originalname));
+                    const pdfFileName = `${fileNameWithoutExt}.pdf`;
+                    const pdfFilePath = path.join(uploadDir, pdfFileName);
 
-        console.log(files);
-	    const savedFiles = await File.insertMany(files);
+                    await libre.convertAsync(fs.readFileSync(file.path), 'pdf', undefined, (err, done) => {
+                        console.log(`converting file to pdf.....`)
+                        if (err) {
+                            throw err;
+                        }
+                        fs.writeFileSync(pdfFilePath, done);
+                    });
 
-	    res.status(200).json({ message: "File upload successfull" });
-      } catch (error) {
-        console.log(error)
-          res.status(500).json({ error: error.message });
-      }
+                    pdfPath = pdfFilePath;
+                } else {
+                    pdfPath = file.path;
+                }
+
+                return {
+                    path: pdfPath,
+                    originalName: file.originalname,
+                    type: mainType,
+                    thumbnailPath: thumbnailPath || null,
+                };
+            }));
+
+            console.log(files);
+            const savedFiles = await File.insertMany(files);
+
+            res.status(200).json({ message: "File upload successful" });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ error: error.message });
+        }
     }
-
-
 
     static async getFiles(req, res) {
         const { search } = req.query;
-    
+
         const query = {};
         if (search) {
-        query.originalName = { $regex: search, $options: 'i' };
+            query.originalName = { $regex: search, $options: 'i' };
         }
-    
+
         try {
-        const files = await File.find(query);
-        res.json({ files });
+            const files = await File.find(query);
+            res.json({ files });
         } catch (error) {
-        res.status(500).json({'error' : 'Internal server error'});
+            res.status(500).json({ 'error': 'Internal server error' });
         }
-    };
-
-
+    }
 
     static async read_file(req, res) {
         try {
             const id = req.params.id;
             const fileDetails = await FileController.getFileDetailsById(id);
-            console.log(fileDetails)
-    
+            console.log(fileDetails);
+
             if (!fileDetails) {
                 return res.status(404).send('File not found');
             }
 
             const filename = path.basename(fileDetails.path);
             const filePath = path.join(uploadDir, filename);
-            console.log(filePath)
-    
+            console.log(filePath);
+
             if (!fs.existsSync(filePath)) {
                 return res.status(404).send('File not found');
             }
 
-            var stream = fs.createReadStream(filePath);
-            var originalName = fileDetails.originalName;
-
+            const stream = fs.createReadStream(filePath);
+            let originalName = fileDetails.originalName;
             originalName = encodeURIComponent(originalName);
 
             const extension = path.extname(originalName);
@@ -109,22 +123,20 @@ class FileController {
             res.setHeader('Content-type', mimeType);
 
             stream.pipe(res);
-        } catch(error) {
-            console.log(error)
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ 'error': 'Internal server error' });
         }
     }
 
     static async getFileDetailsById(id) {
         try {
             const fileDetails = await File.findOne({ _id: new ObjectId(id) });
-    
             return fileDetails;
-        } catch(error) {
-            console.log(error)
+        } catch (error) {
+            console.log(error);
         }
     }
-
 }
-  
 
 module.exports = FileController;

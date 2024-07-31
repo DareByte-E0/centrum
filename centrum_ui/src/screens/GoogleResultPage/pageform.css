@@ -32,6 +32,16 @@
     position: fixed;
     z-index: 10;
   }
+
+  @media (max-width: 600px) {
+    .search-form {
+      width: 50%;
+    }
+
+    .side-nav {
+      right: 0;
+    }
+  }
   
   input[type='text'] {
     flex: 1;

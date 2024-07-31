@@ -14,7 +14,6 @@ const CollapsibleNavBar = () => {
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/feed">feed</Nav.Link>
                         <Nav.Link href="/upload"> <FaUpload size={15} color="blue" /> upload</Nav.Link>
-                        <Nav.Link href="/shelf">shelf</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

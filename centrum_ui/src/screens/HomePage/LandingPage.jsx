@@ -40,10 +40,10 @@ const LandingPage = () => {
 
             <div className='body-content'>
                 <CustomSearch />
-                <div className='body-container'>
+                <div className=''>
 
-                <ChatButton onClick={handleChatClick} />
-                <ChatDialog isOpen={isChatOpen} onClose={handleCloseChat} />
+                
+               
 
                     <div className='v'>
                         <p>Achieve Excellence!</p>
@@ -63,7 +63,7 @@ const LandingPage = () => {
                     </div>
                 </div>
 
-                <div className='body-container'>
+               
                     <div className='v'>
                         <p>Study from anywhere!</p>
                         <img
@@ -81,7 +81,7 @@ const LandingPage = () => {
                             alt="students-reading"
                         />
                     </div>
-                </div>
+                
 
                 <div className='footer-content'>
                     <div className='footer-1'>
