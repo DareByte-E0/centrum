@@ -16,58 +16,31 @@ if (!fs.existsSync(uploadDir)) {
 
 class FileController {
     static async uploadFiles(req, res) {
-        try {
-            const files = await Promise.all(req.files.map(async (file) => {
+          try {
+              const files = await Promise.all(req.files.map(async (file) => {
                 let thumbnailPath;
-                let pdfPath;
-
-                
                 if (file.mimetype.startsWith('video')) {
                     thumbnailPath = await ThumbnailController.generateVideoThumbnail(file);
                 } else if (file.mimetype.startsWith('image')) {
                     thumbnailPath = await ThumbnailController.generateImageThumbnail(file);
                 } else if (file.mimetype.startsWith('application')) {
-                    console.log(`generating thumbnail....`)
                     thumbnailPath = await ThumbnailController.generateApplicationThumbnail(file);
                 }
-
                 const mainType = file.mimetype.split('/')[0];
-
-                
-                if (!file.mimetype.startsWith('application/pdf')) {
-                    const fileNameWithoutExt = path.basename(file.originalname, path.extname(file.originalname));
-                    const pdfFileName = `${fileNameWithoutExt}.pdf`;
-                    const pdfFilePath = path.join(uploadDir, pdfFileName);
-
-                    await libre.convertAsync(fs.readFileSync(file.path), 'pdf', undefined, (err, done) => {
-                        console.log(`converting file to pdf.....`)
-                        if (err) {
-                            throw err;
-                        }
-                        fs.writeFileSync(pdfFilePath, done);
-                    });
-
-                    pdfPath = pdfFilePath;
-                } else {
-                    pdfPath = file.path;
-                }
-
                 return {
-                    path: pdfPath,
+                    path: file.path,
                     originalName: file.originalname,
                     type: mainType,
                     thumbnailPath: thumbnailPath || null,
                 };
             }));
-
             console.log(files);
             const savedFiles = await File.insertMany(files);
-
-            res.status(200).json({ message: "File upload successful" });
-        } catch (error) {
-            console.log(error);
-            res.status(500).json({ error: error.message });
-        }
+            res.status(200).json({ message: "File upload successfull" });
+          } catch (error) {
+            console.log(error)
+              res.status(500).json({ error: error.message });
+          }
     }
 
     static async getFiles(req, res) {

@@ -79,11 +79,7 @@ html, body {
 
 .body-container {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    height: 100vh;
-    position: relative;
+    
 
 }
 
@@ -208,19 +204,6 @@ button:hover {
     }
 }
 
-/* Make images responsive */
-/* .v1-img,
-.v2-img {
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-}
-
-.footer-img {
-    width: 100%;
-    
-    border-radius: 30px;
-} */
 
 
 

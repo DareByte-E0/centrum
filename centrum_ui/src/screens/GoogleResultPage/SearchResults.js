@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './customsearch.css'
 import PageSearch from './PageSearch';
 import './webresults.css'
+import CollapsibleNavBar from '../Navigation/CollpasibleNabar';
 
 const SearchResults = () => {
   useEffect(() => {
@@ -41,6 +42,7 @@ const SearchResults = () => {
 
   return (
     <div>
+      <CollapsibleNavBar />
       
        <PageSearch />
       <div className="gcse-searchresults-only">

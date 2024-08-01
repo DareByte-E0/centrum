@@ -76,6 +76,7 @@ class ThumbnailController {
     static generatePDFThumbnail(inputPath, outputPath) {
         return new Promise((resolve, reject) => {
             const command = `convert -thumbnail x256 "${inputPath}[0]" "${outputPath}"`;
+            console.log(`generating pdf`)
             exec(command, (error) => {
                 if (error) {
                     return reject(error);
@@ -89,6 +90,7 @@ class ThumbnailController {
         try {
             const docxBuf = await fs.readFile(inputPath);
             const ext = '.pdf';
+            console.log(`converting to pdf....`)
             const pdfBuf = await libre.convertAsync(docxBuf, ext, undefined);
 
             const tempPdfPath = path.join('uploads/thumbnails', `${path.parse(inputPath).name}.pdf`);
@@ -98,6 +100,7 @@ class ThumbnailController {
             await ThumbnailController.generatePDFThumbnail(tempPdfPath, outputPath);
 
             // Cleanup the temporary PDF file
+            console.log(`deleting generated pdf`)
             await fs.unlink(tempPdfPath);
         } catch (error) {
             console.error('Error converting DOCX to PDF:', error);

@@ -13,23 +13,34 @@
   
   input[type='text'] {
     flex: 1;
-    padding: 12px; /* Increased padding */
+    padding: 12px; 
     border: none;
-    border-radius: 8px; /* Slightly rounded edges */
+    border-radius: 8px;
     font-size: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   }
   
   button[type='submit'] {
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 8px; /* Slightly rounded edges */
-    padding: 12px 24px; /* Increased padding */
+    border-radius: 8px; 
+    padding: 12px 24px; 
     cursor: pointer;
     font-size: 16px;
-    margin-left: 8px; /* Adjusted margin */
-    transition: background-color 0.3s ease; /* Smooth hover transition */
+    margin-left: 8px;
+    transition: background-color 0.3s ease;
+  }
+
+  @media (max-width: 600px) {
+    button[type='submit'] {
+      margin-left: 0px;
+    }
+    
+    .search-form-1 {
+      flex-direction: column;
+      gap: 10px;
+    }
   }
   
   button[type='submit']:hover {

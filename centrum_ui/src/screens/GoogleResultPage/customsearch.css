@@ -1,5 +1,10 @@
 /* CustomSearch.css */
 
+
+.install {
+  display: none;
+}
+
 .custom-search-container {
     margin: 20px;
     padding: 10px;

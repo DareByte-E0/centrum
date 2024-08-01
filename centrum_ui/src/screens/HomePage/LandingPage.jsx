@@ -40,7 +40,7 @@ const LandingPage = () => {
 
             <div className='body-content'>
                 <CustomSearch />
-                <div className=''>
+                <div className='body-container'>
 
                 
                
@@ -64,6 +64,7 @@ const LandingPage = () => {
                 </div>
 
                
+                <div className='body-container'>
                     <div className='v'>
                         <p>Study from anywhere!</p>
                         <img
@@ -81,6 +82,7 @@ const LandingPage = () => {
                             alt="students-reading"
                         />
                     </div>
+                </div>    
                 
 
                 <div className='footer-content'>

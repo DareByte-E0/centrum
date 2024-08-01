@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './pageform.css'
 import { FaSearch } from 'react-icons/fa';
-import SidebarNavBar from '../Navigation/SideNavbar';
+
 
 
 const PageSearch = () => {
@@ -59,9 +59,7 @@ const PageSearch = () => {
       </form>
         
 
-      <div className='side-nav'>
-      <SidebarNavBar/>
-      </div>
+     
     
       </div>
     </div>
