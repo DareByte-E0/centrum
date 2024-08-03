@@ -4,6 +4,7 @@
     position: relative;
     top: 80px;
     z-index: 100;
+    display: block;
 }
 
 #install {

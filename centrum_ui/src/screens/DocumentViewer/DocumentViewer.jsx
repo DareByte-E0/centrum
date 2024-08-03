@@ -5,6 +5,7 @@ import './documentview.css'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { useLocation } from 'react-router-dom';
+import PdfViewer from './PdfViewer';
 
 const DocumentViewer = () => {
     const location = useLocation();
@@ -12,6 +13,7 @@ const DocumentViewer = () => {
     const documentId = location.state?.documentId;
     const documentUrl = `${API_URL}/files/${documentId}`;
     console.log('hola')
+    console.log(`it is me and you today ${documentUrl}`)
     console.log(documentId)
 
     const handleLoad = () => {
@@ -20,24 +22,7 @@ const DocumentViewer = () => {
 
     return (
         <div className="document-viewer-container">
-            {loading && (
-                <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: '100%'
-                    }}
-                >
-                    <CircularProgress />
-                </Box>
-            )}
-            <Iframe
-                url={documentUrl}
-                className="document-viewer-iframe"
-                onLoad={handleLoad}
-                style={{ display: loading ? 'none' : 'block' }}
-            />
+            <PdfViewer fileUrl={documentUrl} />
         </div>
     );
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './customsearch.css'
 import PageSearch from './PageSearch';
 import './webresults.css'
+import './install.css'
 import CollapsibleNavBar from '../Navigation/CollpasibleNabar';
 
 const SearchResults = () => {

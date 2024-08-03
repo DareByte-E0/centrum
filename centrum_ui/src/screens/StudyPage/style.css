@@ -16,6 +16,12 @@
     background-color: #1b2838; 
     float: left; 
   }
+
+  @media (max-width: 600px) {
+    .navigation-pane {
+      display: none;
+    }
+  }
   
   .navigation-link {
     display: block;
@@ -36,6 +42,12 @@
     background-color: #ffffff; 
     overflow-y: auto; 
     float: left; 
+  }
+
+  @media (max-width: 600px) {
+    .main-screen {
+      width: 100%;
+    }
   }
   
   /* TopPane.css */

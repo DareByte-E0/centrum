@@ -8,3 +8,12 @@
     height: 100vh;
     width: 100%;
 }
+
+.pdfview canvas {
+    border: 1px solid #000;
+    display: block;
+}
+
+.doc-image {
+    width: 100%;
+}
