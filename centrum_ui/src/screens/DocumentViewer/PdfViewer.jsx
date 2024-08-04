@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './documentview.css'
+import './pdf.css'
 import * as pdfjs from 'pdfjs-dist/build/pdf.min.mjs';
 await import('pdfjs-dist/build/pdf.worker.min.mjs');
 

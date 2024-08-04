@@ -14,7 +14,9 @@
     width: 20%; 
     height: 100vh; 
     background-color: #1b2838; 
-    float: left; 
+    float: left;
+    position: relative;
+    z-index: 2; 
   }
 
   @media (max-width: 600px) {
@@ -57,7 +59,10 @@
     background-color: #333333; 
     color: #ffffff; 
     text-align: right; 
-    padding: 10px; 
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    z-index: 3; 
   }
 
   .footer-s {

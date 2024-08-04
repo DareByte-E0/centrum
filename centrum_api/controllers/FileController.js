@@ -14,7 +14,41 @@ if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
+const tempUploadDir = path.join(__dirname, '../tempuploads');
+if (!fs.existsSync(tempUploadDir)) {
+    fs.mkdirSync(tempUploadDir, { recursive: true });
+}
+
 class FileController {
+
+    static convertToPdfOnUpload(file, thumbnailPath) {
+        const inputFile = `${file.path}`;
+        const outputFile = path.basename(inputFile, path.extname(inputFile)) + '.pdf';
+        
+        const outputFilePath = path.join(tempUploadDir, outputFile)
+        
+        const { exec } = require('child_process');
+        exec(`libreoffice --headless --convert-to pdf ${inputFile} --outdir ${tempUploadDir} && 
+            mv ${outputFilePath} ${uploadDir} && 
+            rm -f ${inputFile}`, (err, stdout, stderr) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        // the *entire* stdout and stderr (buffered)
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+        const mainType = file.mimetype.split('/')[0];
+        return {
+            path: `${file.path}.pdf`,
+            originalName: file.originalname,
+            type: mainType,
+            thumbnailPath: thumbnailPath || null,
+        };
+    });
+    }
+
     static async uploadFiles(req, res) {
           try {
               const files = await Promise.all(req.files.map(async (file) => {
@@ -27,6 +61,11 @@ class FileController {
                     thumbnailPath = await ThumbnailController.generateApplicationThumbnail(file);
                 }
                 const mainType = file.mimetype.split('/')[0];
+                if (mainType === 'application') {
+                    
+                    FileController.convertToPdfOnUpload(file, thumbnailPath);
+                    
+                }
                 return {
                     path: file.path,
                     originalName: file.originalname,
@@ -63,14 +102,17 @@ class FileController {
         try {
             const id = req.params.id;
             const fileDetails = await FileController.getFileDetailsById(id);
-            console.log(fileDetails);
+            
 
             if (!fileDetails) {
                 return res.status(404).send('File not found');
             }
 
             const filename = path.basename(fileDetails.path);
-            const filePath = path.join(uploadDir, filename);
+            let filePath = path.join(uploadDir, filename);
+            if(fileDetails.type === 'application') {
+                filePath = path.join(uploadDir, filename) + '.pdf';
+            }
             console.log(filePath);
 
             if (!fs.existsSync(filePath)) {

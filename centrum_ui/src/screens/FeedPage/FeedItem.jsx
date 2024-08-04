@@ -10,9 +10,13 @@ const FeedItem = ({ item }) => {
   const [isPlaying, setIsPlaying] = React.useState(false);
   const navigate = useNavigate();
 
-  const handleOpen = (id) => {
+  const handleOpenDoc = (id) => {
     navigate('/study', {state: { documentId: id}});
   };
+
+  const handleOpenVid = (id) => {
+    navigate('/study', {state: { videoId: id}});
+  }
 
 
   const StyledReactPlayer = styled(ReactPlayer)({
@@ -41,7 +45,13 @@ const FeedItem = ({ item }) => {
 
 
       {item.type === 'video' && (
+        <div>
           <StyledReactPlayer url={`${API_URL}/${item.path}`} controls width="100%" playing />
+          <Button variant="contained" color="primary" onClick={ () => handleOpenVid(item._id) }>
+            Open video
+          </Button>
+        </div>
+          
         )
       }
 
@@ -128,7 +138,7 @@ const FeedItem = ({ item }) => {
             }}>
               {item.originalName}
             </Typography>
-            <Button variant="contained" color="primary" onClick={ () => handleOpen(item._id) }>
+            <Button variant="contained" color="primary" onClick={ () => handleOpenDoc(item._id) }>
             Open Document
           </Button>
           </CardContent>
