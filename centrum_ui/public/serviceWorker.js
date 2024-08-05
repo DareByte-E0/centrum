@@ -3,8 +3,8 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/offline.html',
-  '/static/js/main.81f87c4d.js',
-  '/static/css/main.353a9e86.css',
+  '/static/js/main.1b3d69f1.js',
+  '/static/css/main.8f3becf4.css',
 ];
 
 // Install event

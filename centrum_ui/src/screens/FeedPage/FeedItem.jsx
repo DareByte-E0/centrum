@@ -14,8 +14,8 @@ const FeedItem = ({ item }) => {
     navigate('/study', {state: { documentId: id}});
   };
 
-  const handleOpenVid = (id) => {
-    navigate('/study', {state: { videoId: id}});
+  const handleOpenVid = (id, name) => {
+    navigate('/study', {state: { videoId: id, title: name}});
   }
 
 
@@ -47,7 +47,7 @@ const FeedItem = ({ item }) => {
       {item.type === 'video' && (
         <div>
           <StyledReactPlayer url={`${API_URL}/${item.path}`} controls width="100%" playing />
-          <Button variant="contained" color="primary" onClick={ () => handleOpenVid(item._id) }>
+          <Button variant="contained" color="primary" onClick={ () => handleOpenVid(item._id, item.originalName.split('.')[0]) }>
             Open video
           </Button>
         </div>

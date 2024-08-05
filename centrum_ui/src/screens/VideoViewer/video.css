@@ -8,3 +8,8 @@
         z-index: 1;
     }
 }
+
+.vid-txt {
+    position: relative;
+    top: 40px;
+}
