@@ -7,9 +7,7 @@
   pointer-events: none;
 }
 
-.emma {
-  width: 0;
-}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
