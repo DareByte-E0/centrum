@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import './customsearch.css'
-import PageSearch from './PageSearch';
 import './webresults.css'
 import './install.css'
-import CollapsibleNavBar from '../Navigation/CollpasibleNabar';
+
+const PageSearch = lazy(() => import('./PageSearch'));
 
 const SearchResults = () => {
   useEffect(() => {
@@ -43,9 +43,10 @@ const SearchResults = () => {
 
   return (
     <div>
-      <CollapsibleNavBar />
-      
-       <PageSearch />
+     
+      <Suspense fallback={<div>Loading...</div>}>
+        <PageSearch />
+      </Suspense>
       <div className="gcse-searchresults-only">
       </div>
     </div>

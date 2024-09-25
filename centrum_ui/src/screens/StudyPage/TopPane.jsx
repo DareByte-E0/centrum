@@ -1,13 +1,15 @@
 // TopPane.js
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import './style.css';
-import SidebarNavBar from '../Navigation/SideNavbar';
 
+const SidebarNavBar = lazy(() => import('../Navigation/SideNavbar'));
 const TopPane = () => {
   return (
     <div className="top-pane">
       <div className='top-pane-nav'>
-        <SidebarNavBar />
+        <Suspense fallback={<div>Loading...</div>}>
+          <SidebarNavBar />
+        </Suspense>
       </div>
       {/* Profile icon */}
     </div>

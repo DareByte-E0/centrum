@@ -1,27 +1,13 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import './landing.css';
-import Footer from '../Navigation/Footer';
-import CustomSearch from './CustomSearch';
-import CollapsibleNavBar from '../Navigation/CollpasibleNabar';
-import ChatButton from '../GptChatInterface/ChatButton';
-import ChatDialog from '../GptChatInterface/ChatDialog';
 
+
+const CustomSearch = lazy(() => import('./CustomSearch'));
 const LandingPage = () => {
-
-    const [isChatOpen, setIsChatOpen] = React.useState(false);
-
-    const handleChatClick = () => {
-        setIsChatOpen(true);
-    };
-
-    const handleCloseChat = () => {
-        setIsChatOpen(false);
-    };
-
-
+   console.log('re-rendering')
     return (
         <div className='Landing-page'>
-            <CollapsibleNavBar />
+           
             <div className='group'>
                 <div className='brand'>
                     A student-centric service
@@ -39,17 +25,19 @@ const LandingPage = () => {
             </div>
 
             <div className='body-content'>
-                <CustomSearch />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <CustomSearch />
+                </Suspense>
                 <div className='body-container'>
 
                 
                
 
                     <div className='v'>
-                        <p>Achieve Excellence!</p>
+                        <p>Excellence!</p>
                         <img
                             className='v-img'
-                            src={`${process.env.PUBLIC_URL}/images/student-1.jpg`}
+                            src={`${process.env.PUBLIC_URL}/images/student-1.WebP`}
                             alt="students-reading"
                         />
                     </div>
@@ -57,7 +45,7 @@ const LandingPage = () => {
                         <p>Connect!</p>
                         <img
                             className='v-img'
-                            src={`${process.env.PUBLIC_URL}/images/student-6.jpg`}
+                            src={`${process.env.PUBLIC_URL}/images/student-6.WebP`}
                             alt="students-reading"
                         />
                     </div>
@@ -66,19 +54,19 @@ const LandingPage = () => {
                
                 <div className='body-container'>
                     <div className='v'>
-                        <p>Study from anywhere!</p>
+                        <p>Study!</p>
                         <img
                             className='v-img'
-                            src={`${process.env.PUBLIC_URL}/images/student-3.jpg`}
+                            src={`${process.env.PUBLIC_URL}/images/student-3.WebP`}
                             alt="students-reading"
                         />
                     </div>
 
                     <div className='v'>
-                        <p>Reading made-easy!</p>
+                        <p>Research!</p>
                         <img
                             className='v-img'
-                            src={`${process.env.PUBLIC_URL}/images/student-4.jpg`}
+                            src={`${process.env.PUBLIC_URL}/images/student-4.WebP`}
                             alt="students-reading"
                         />
                     </div>
@@ -100,7 +88,7 @@ const LandingPage = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+           
         </div>
     )
 }

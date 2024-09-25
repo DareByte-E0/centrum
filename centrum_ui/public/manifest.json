@@ -1,5 +1,5 @@
 {
-  "short_name": "pro",
+  "short_name": "prof",
   "name": "professor",
   "icons": [
     {
@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "icon192.png",
+      "src": "icon192.WebP",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "icon512.png",
+      "src": "icon512.WebP",
       "type": "image/png",
       "sizes": "512x512"
     }

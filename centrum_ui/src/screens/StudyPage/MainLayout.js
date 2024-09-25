@@ -1,23 +1,24 @@
 // MainLayout.js
-import React from 'react';
-import NavigationPane from './NavPane';
-import MainScreen from './MainScreen';
-import TopPane from './TopPane';
-import Footer from '../Navigation/Footer';
+import React, { lazy, Suspense } from 'react';
 import './style.css'
 import './install.css'
+
+const NavigationPane = lazy(() => import('./NavPane'));
+const MainScreen = lazy(() => import('./MainScreen'));
+const TopPane = lazy(() => import('./TopPane'));
 
 const MainLayout = () => {
   return (
     <div className="main-layout">
-      <TopPane />
-      <div className="">
-        <NavigationPane />
-        <MainScreen />
-      </div>
-      <div className='footer-s'>
-      <Footer />
-      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <TopPane />
+        <div className="">
+          <NavigationPane />
+          <MainScreen />
+        </div>
+        <div className='footer-s'>
+        </div>
+      </Suspense>
     </div>
   );
 }

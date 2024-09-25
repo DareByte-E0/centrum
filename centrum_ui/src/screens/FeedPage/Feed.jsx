@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import axios from 'axios';
 import { Box, CircularProgress, Typography } from '@mui/material';
-import FeedItem from './FeedItem';
 import API_URL from '../../Config';
-import Filter from './Filter';
-import SearchFeed from './SearchFeed';
 import './filter.css'
-import SearchDialog from './SearchDialog';
+
+const Filter = lazy(() => import('./Filter'));
+const FeedItem = lazy(() => import('./FeedItem'));
+const SearchFeed = lazy(() => import('./SearchFeed'));
+const SearchDialog = lazy(() => import('./SearchDialog'));
+
 
 const Feed = () => {
   const [feedItems, setFeedItems] = useState([]);
@@ -47,7 +49,8 @@ const Feed = () => {
 
   const filteredItems = feedItems.filter(item => {
     const matchesFilter = filters[item.type];
-    const matchesSearch = searchQuery === '' || item.originalName.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = searchQuery === '' || item.originalName.toLowerCase().includes(searchQuery.toLowerCase())
+    || item.title.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
@@ -62,18 +65,23 @@ const Feed = () => {
       ) : (
         <>
           <div className='filter'>
-            <SearchFeed onSearch={handleSearch} />
-            <Filter filters={filters} setFilters={setFilters} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <SearchFeed onSearch={handleSearch} />
+              <Filter filters={filters} setFilters={setFilters} />
+            </Suspense>
           </div>
 
           <div className='button-fixed'>
-                <SearchDialog  onSearch={handleSearch}/>
+            <Suspense fallback={<div>Loading...</div>}>
+              <SearchDialog  onSearch={handleSearch}/>
+            </Suspense>
           </div>
           {filteredItems.length > 0 ? (
             <Box>
               {filteredItems.map((item, index) => (
-                
-                  <FeedItem item={item} />
+                <Suspense fallback={<div className='load-post-splash'></div>}>
+                   <FeedItem item={item} />
+                </Suspense>
                
               ))}
             </Box>

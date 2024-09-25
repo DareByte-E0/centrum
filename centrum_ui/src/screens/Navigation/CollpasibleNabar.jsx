@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import './customnav.css'
-import { FaUpload } from 'react-icons/fa';
+import { FaUpload, FaUser } from 'react-icons/fa';
 
 const CollapsibleNavBar = () => {
     return (
@@ -12,7 +12,7 @@ const CollapsibleNavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav id='font-s' className="ms-auto">
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/feed">feed</Nav.Link>
+                        <Nav.Link href="/feed">status</Nav.Link>
                         <Nav.Link href="/upload"> <FaUpload size={15} color="blue" /> upload</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -20,6 +20,9 @@ const CollapsibleNavBar = () => {
                             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                             
                         </NavDropdown>
+                        <Nav.Link className='user-icon' href="/profile"><FaUser className='icon'/></Nav.Link>
+                        
+                        
                     </Nav>
                 </Navbar.Collapse>
             </Container>

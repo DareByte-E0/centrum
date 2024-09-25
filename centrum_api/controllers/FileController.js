@@ -50,8 +50,22 @@ class FileController {
     }
 
     static async uploadFiles(req, res) {
-          try {
-              const files = await Promise.all(req.files.map(async (file) => {
+        try {
+            const files = await Promise.all(req.files.map(async (file, index) => {
+                let title, description;
+                if (Array.isArray(req.body.title)) {
+                    title = req.body.title[index] || '';
+                } else {
+                    title = req.body.title || '';
+                }
+    
+                if (Array.isArray(req.body.description)) {
+                    description = req.body.description[index] || ''; 
+                } else {
+                    description = req.body.description || '';
+                }
+
+                
                 let thumbnailPath;
                 if (file.mimetype.startsWith('video')) {
                     thumbnailPath = await ThumbnailController.generateVideoThumbnail(file);
@@ -60,43 +74,51 @@ class FileController {
                 } else if (file.mimetype.startsWith('application')) {
                     thumbnailPath = await ThumbnailController.generateApplicationThumbnail(file);
                 }
+                
                 const mainType = file.mimetype.split('/')[0];
                 if (mainType === 'application') {
-                    
                     FileController.convertToPdfOnUpload(file, thumbnailPath);
-                    
                 }
+                
                 return {
                     path: file.path,
                     originalName: file.originalname,
                     type: mainType,
+                    title: title || '', 
+                    description: description || '', 
                     thumbnailPath: thumbnailPath || null,
                 };
             }));
+            
             console.log(files);
             const savedFiles = await File.insertMany(files);
-            res.status(200).json({ message: "File upload successfull" });
-          } catch (error) {
-            console.log(error)
-              res.status(500).json({ error: error.message });
-          }
+            res.status(200).json({ message: "File upload successful", files: savedFiles });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ error: error.message });
+        }
     }
+    
 
     static async getFiles(req, res) {
         const { search } = req.query;
-
+    
         const query = {};
         if (search) {
-            query.originalName = { $regex: search, $options: 'i' };
+            query.$or = [
+                { title: { $regex: search, $options: 'i' } },
+                { originalName: { $regex: search, $options: 'i' } }
+            ];
         }
-
+    
         try {
             const files = await File.find(query);
             res.json({ files });
         } catch (error) {
-            res.status(500).json({ 'error': 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error' });
         }
     }
+    
 
     static async read_file(req, res) {
         try {

@@ -1,3 +1,23 @@
+/* UserIcon.css */
+.user-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    border-radius: 50%; /* Makes the div circular */
+    border: 2px solid #000; /* Border color */
+    background-color: transparent; /* Background color */
+  }
+  
+  .icon {
+    color: #000; /* Icon color */
+    width: 24px; /* Icon size */
+    height: 24px; /* Icon size */
+  }
+  
+
+
 #font-s {
     font-size: 1.2rem;
 }

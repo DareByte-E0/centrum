@@ -17,7 +17,15 @@ const fileSchema = new mongoose.Schema({
 
     type: {
         type: String,
-        required: true
+        required: true,
+    },
+
+    title: {
+        type: String,
+    },
+
+    description: {
+        type: String,
     },
     
 }, { timestamps: true });

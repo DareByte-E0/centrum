@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import './uploadpage.css'
-import CollapsibleNavBar from '../Navigation/CollpasibleNabar';
 import Circles from '../Brand/Circles';
-import Portal from './Portal';
-import FeatureList from './FeatureList';
-import Footer from '../Navigation/Footer';
-import Testimonials from './Testimonial';
 
+const Portal = lazy(() => import('./Portal'));
+const FeatureList = lazy(() => import('./FeatureList'));
+const Testimonials = lazy(() => import('./Testimonial'));
 
 const UploadPage = () => {
     return (
        <div className='upload-page'>
-            <CollapsibleNavBar />
+           
             <div className='brand-circle'>
                 <Circles />
             </div>
@@ -22,22 +20,28 @@ const UploadPage = () => {
                 </div>
 
                 <div className='upload-item2'>
-                    <Portal />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Portal />
+                    </Suspense>
                 </div>
             </div>
 
             <div className='feature-section'>
-                <FeatureList />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <FeatureList />
+                </Suspense>
             </div>
             <div className='testimonial-section'>
-            <Testimonials />
+                <Suspense fallback={<div>Loading....</div>}>
+                    <Testimonials />
+                </Suspense>
             </div>
             
 
 
             
             <div className='footer-s'>
-             <Footer />
+            
             </div>
        </div>
     )

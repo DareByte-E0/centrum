@@ -1,152 +1,98 @@
-import React from 'react';
-import { Card, CardContent, Typography, CardMedia, Box, Button } from '@mui/material';
-import ReactPlayer from 'react-player';
-import { styled } from '@mui/system';
-import API_URL from '../../Config';
+import React, { useState } from 'react';
+import { FaThumbsUp, FaComment, FaUser  } from 'react-icons/fa';
+import { FiMoreHorizontal } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import './feeditem.css';
+import API_URL from '../../Config';
+
 
 const FeedItem = ({ item }) => {
-
-  const [isPlaying, setIsPlaying] = React.useState(false);
   const navigate = useNavigate();
+  let [textClick, setTextClick] = useState('card-desc')
 
   const handleOpenDoc = (id) => {
-    navigate('/study', {state: { documentId: id}});
+    navigate('/study', { state: { documentId: id } });
   };
 
   const handleOpenVid = (id, name) => {
-    navigate('/study', {state: { videoId: id, title: name}});
-  }
-
-
-  const StyledReactPlayer = styled(ReactPlayer)({
-    cursor: 'pointer',
-    '&:hover': {
-      cursor: 'pointer',
-    },
-  });
-
-  const handleThumbnailClick = () => {
-    setIsPlaying(true);
+    navigate('/study', { state: { videoId: id, title: name } });
   };
 
-  return (
-    <Card sx={{ 
-      marginBottom: 2, 
-      borderRadius: 5, 
-      position: 'relative',
-      bgcolor: '#3f5979',
-      color: '#FFFFFF', 
-      overflow: 'hidden', '&:hover .overlay': { opacity: 1 } }}>
-      <CardContent sx={{ position: 'relative', zIndex: 2 }}>
-        <Typography variant="h5" gutterBottom>{item.originalName.split('.')[0]}</Typography>
-        <Typography variant="body2" color="textSecondary">{item.type}</Typography>
-      </CardContent>
+  const textClickToggle = () => {
+    if (textClick === 'card-desc') {
+      return setTextClick('card-desc-rev')
+    }
+    setTextClick('card-desc')
+  }
 
+  return (
+    <div className="card">
+      <div className="card-content">
+        <div>
+          <FaUser />
+        </div>
+
+        <div>
+        <FiMoreHorizontal size={24} style={{ cursor: 'pointer' }} />
+        </div>
+      </div>
+
+      <div className='write-up' onClick={textClickToggle}>
+       <div className='card-title'> <h3>{item.title}</h3></div>
+
+       <div className={textClick}>
+          {item.description}
+       </div>
+      
+      </div>
 
       {item.type === 'video' && (
-        <div>
-          <StyledReactPlayer url={`${API_URL}/${item.path}`} controls width="100%" playing />
-          <Button variant="contained" color="primary" onClick={ () => handleOpenVid(item._id, item.originalName.split('.')[0]) }>
-            Open video
-          </Button>
+        <div className="video-container">
+          <video src={`${API_URL}/${item.path}`} controls width="100%"/>
+          <button className="action-btn" onClick={() => handleOpenVid(item._id, item.title)}>
+            Open Video
+          </button>
         </div>
-          
-        )
-      }
-
+      )}
 
       {item.type === 'audio' && (
-        <ReactPlayer url={item.path} controls width="100%" height="50px" />
+        <div className="audio-container">
+          <audio src={`${API_URL}/${item.path}`} controls width="100%" />
+        </div>
       )}
-
 
       {item.type === 'image' && (
-        <>
-          <CardMedia
-            component="img"
-            image={`${API_URL}/${item.thumbnailPath}`}
-            alt={item.originalName}
-            sx={{ maxHeight: 300, 
-              height: 'auto', 
-              padding: 1.2, 
-              objectFit: 'none',
-              borderRadius: 8, 
-              transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.05)' } }}
-          />
-          <Box
-            className="overlay"
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              bgcolor: 'rgba(0, 0, 0, 0.6)',
-              color: 'white',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              opacity: 0,
-              transition: 'opacity 0.3s ease-in-out',
-            }}
-          >
-            <Typography variant="h5">{item.originalName}</Typography>
-            <Typography variant="body2">{item.type}</Typography>
-          </Box>
-        </>
+        <div className="image-container">
+          <img className="image-thumbnail" src={`${API_URL}/${item.thumbnailPath}`} alt={item.originalName} />
+          {/* <div className="overlay">
+            <h4>{item.originalName}</h4>
+            <p>{item.type}</p>
+          </div> */}
+        </div>
       )}
-
 
       {item.type === 'application' && (
-        <Card sx={{
-          boxShadow: 3,
-          borderRadius: 2,
-          transition: 'box-shadow 0.3s ease-in-out',
-          '&:hover': {
-            boxShadow: 9,
-          },
-          maxWidth: 345,
-          margin: 'auto',
-        }}>
-          <CardMedia
-            component="img"
-            image={`${API_URL}/${item.thumbnailPath}`}
-            alt={item.originalName}
-            sx={{
-              height: 200,
-              objectFit: 'none',
-              borderRadius: '8px 8px 0 0',
-              transition: 'transform 0.3s ease-in-out',
-              '&:hover': {
-                transform: 'scale(1.05)',
-              },
-            }}
-          />
-          <CardContent sx={{
-            padding: 2,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            backgroundColor: '#f5f5f5',
-          }}>
-            <Typography variant="body1" sx={{ 
-              fontWeight: 'bold', 
-              textAlign: 'center',
-              marginBottom: 1,
-            }}>
-              {item.originalName}
-            </Typography>
-            <Button variant="contained" color="primary" onClick={ () => handleOpenDoc(item._id) }>
-            Open Document
-          </Button>
-          </CardContent>
-        </Card>
+        <div className="doc-container">
+          <img className="doc-thumbnail" src={`${API_URL}/${item.thumbnailPath}`} alt={item.originalName} />
+          <div className="doc-details">
+            <p>{item.originalName}</p>
+            <button className="action-btn" onClick={() => handleOpenDoc(item._id)}>
+              Open Document
+            </button>
+          </div>
+        </div>
       )}
-      
-      
-    </Card>
+
+      {/* Like and Comment Buttons */}
+      <div className="card-actions">
+        <button className="action-btn like-btn">
+          <FaThumbsUp /> Like
+        </button>
+        <button className="action-btn comment-btn">
+          <FaComment /> Comment
+        </button>
+      </div>
+    </div>
   );
 };
 

@@ -1,22 +1,27 @@
-
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import './style.css';
-import DocumentViewer from '../DocumentViewer/DocumentViewer';
-import VideoViewer from '../VideoViewer/VideoViewer';
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom';
+
+
+const DocumentViewer = lazy(() => import('../DocumentViewer/DocumentViewer'));
+const VideoViewer = lazy(() => import('../VideoViewer/VideoViewer'));
 
 const MainScreen = () => {
   const location = useLocation();
   const videoId = location.state?.videoId;
   const documentId = location.state?.documentId;
-  console.log(`first video id ${videoId}`)
-  console.log(`first doc id ${documentId}`)
 
-  
   return (
     <div className="main-screen">
-    { videoId && (<VideoViewer />)}
-    { documentId && (<DocumentViewer />)}
+      <Suspense fallback={<div>Loading...</div>}>
+        {videoId ? (
+          <VideoViewer videoId={videoId} />
+        ) : documentId ? (
+          <DocumentViewer documentId={documentId} />
+        ) : (
+          <div>No content to display</div>
+        )}
+      </Suspense>
     </div>
   );
 }

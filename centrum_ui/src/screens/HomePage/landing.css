@@ -79,19 +79,20 @@ html, body {
 
 .body-container {
     display: flex;
-    
-
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
 }
 
 .v {
     color:#45b3fa;
-    /* color: #f7dc6f; */
+    width: 30%;
 }
 
 .v-img {
-    width: 90%;
+    width: 100%;
     height: auto;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 
@@ -247,12 +248,13 @@ button:hover {
     }
 
     .body-container {
-        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
-    .v1, .v2, .v3, .v4 {
-        width: 100%;
-        margin-bottom: 20px;
+    .v {
+        width: 40%;
+        font-size: 1rem;
     }
 
     .footer-content {

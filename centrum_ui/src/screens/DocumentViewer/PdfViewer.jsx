@@ -1,9 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './documentview.css'
-import './pdf.css'
-import * as pdfjs from 'pdfjs-dist/build/pdf.min.mjs';
-await import('pdfjs-dist/build/pdf.worker.min.mjs');
-
+import React, { useEffect, useState } from 'react';
+import './documentview.css';
+import './pdf.css';
 
 const PdfViewer = ({ fileUrl }) => {
     const [pages, setPages] = useState([]);
@@ -13,6 +10,9 @@ const PdfViewer = ({ fileUrl }) => {
     useEffect(() => {
         const fetchAndRenderPdf = async () => {
             try {
+                const pdfjs = await import('pdfjs-dist/build/pdf.min.mjs');
+                await import('pdfjs-dist/build/pdf.worker.min.mjs');
+
                 const pdf = await pdfjs.getDocument(fileUrl).promise;
                 const numPages = pdf.numPages;
                 const pagesArray = [];

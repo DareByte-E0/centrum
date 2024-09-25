@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl, FormGroup, FormControlLabel, Checkbox, Typography } from '@mui/material';
+import { FormControl, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 
 const Filter = ({ filters, setFilters }) => {
   const handleChange = (event) => {

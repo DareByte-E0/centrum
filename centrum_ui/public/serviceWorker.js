@@ -1,4 +1,4 @@
-const CACHE_NAME = 'prof-version1';
+const CACHE_NAME = 'professor-version1';
 const urlsToCache = [
   '/',
   '/index.html',
