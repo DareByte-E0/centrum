@@ -3,12 +3,15 @@ import { FaThumbsUp, FaComment, FaUser  } from 'react-icons/fa';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import './feeditem.css';
+import CommentModal from './CommentDialog';
 import API_URL from '../../Config';
 
 
 const FeedItem = ({ item }) => {
   const navigate = useNavigate();
-  let [textClick, setTextClick] = useState('card-desc')
+  let [textClick, setTextClick] = useState('card-desc');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [comments, setComments] = useState([]);
 
   const handleOpenDoc = (id) => {
     navigate('/study', { state: { documentId: id } });
@@ -24,6 +27,11 @@ const FeedItem = ({ item }) => {
     }
     setTextClick('card-desc')
   }
+
+  const handleCommentSubmit = (newComment) => {
+    setComments((prevComments) => [...prevComments, newComment]);
+  };
+
 
   return (
     <div className="card">
@@ -88,10 +96,17 @@ const FeedItem = ({ item }) => {
         <button className="action-btn like-btn">
           <FaThumbsUp /> Like
         </button>
-        <button className="action-btn comment-btn">
+        <button className="action-btn comment-btn" onClick={() => setIsModalOpen(true)}>
           <FaComment /> Comment
         </button>
       </div>
+
+      <CommentModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        comments={comments}
+        onSubmit={handleCommentSubmit}
+      />
     </div>
   );
 };

@@ -3,8 +3,8 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/offline.html',
-  '/static/js/main.1b3d69f1.js',
-  '/static/css/main.8f3becf4.css',
+  '/static/js/main.*.js',
+  '/static/css/main.*.css',
 ];
 
 // Install event
@@ -18,21 +18,36 @@ self.addEventListener('install', (event) => {
   );
 });
 
+
 // Fetch event
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then((response) => {
-        if (response) {
+        // Check if the response is valid and not a redirect
+        if (!response || response.status !== 200 || response.type === 'opaqueredirect') {
           return response;
         }
-        return fetch(event.request);
+        
+        // Update the cache with the new response
+        const responseToCache = response.clone();
+        caches.open(CACHE_NAME)
+          .then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+
+        return response;
       })
       .catch(() => {
-        return caches.match('offline.html');
+        // If fetch fails, try to match the request in the cache
+        return caches.match(event.request)
+          .then((response) => {
+            return response || caches.match('/offline.html');
+          });
       })
   );
 });
+
 
 // Activate event and clean up old caches
 self.addEventListener('activate', (event) => {

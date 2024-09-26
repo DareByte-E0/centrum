@@ -65,14 +65,14 @@ const Feed = () => {
       ) : (
         <>
           <div className='filter'>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div className='load-post-splash'></div>}>
               <SearchFeed onSearch={handleSearch} />
               <Filter filters={filters} setFilters={setFilters} />
             </Suspense>
           </div>
 
           <div className='button-fixed'>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div className='load-post-splash'></div>}>
               <SearchDialog  onSearch={handleSearch}/>
             </Suspense>
           </div>
