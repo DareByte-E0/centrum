@@ -7,11 +7,11 @@ import CommentModal from './CommentDialog';
 import API_URL from '../../Config';
 
 
-const FeedItem = ({ item }) => {
+const FeedItem = ({ item, comments, setComments }) => {
   const navigate = useNavigate();
   let [textClick, setTextClick] = useState('card-desc');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [comments, setComments] = useState([]);
+  
 
   const handleOpenDoc = (id) => {
     navigate('/study', { state: { documentId: id } });
@@ -29,7 +29,10 @@ const FeedItem = ({ item }) => {
   }
 
   const handleCommentSubmit = (newComment) => {
-    setComments((prevComments) => [...prevComments, newComment]);
+    setComments((prevComments) => ({
+      ...prevComments,
+      [item._id]: [...(prevComments[item._id] || []), newComment],
+    }));
   };
 
 
@@ -83,7 +86,7 @@ const FeedItem = ({ item }) => {
         <div className="doc-container">
           <img className="doc-thumbnail" src={`${API_URL}/${item.thumbnailPath}`} alt={item.originalName} />
           <div className="doc-details">
-            <p>{item.originalName}</p>
+            {/* <p>{item.originalName}</p> */}
             <button className="action-btn" onClick={() => handleOpenDoc(item._id)}>
               Open Document
             </button>
@@ -101,10 +104,11 @@ const FeedItem = ({ item }) => {
         </button>
       </div>
 
+      
       <CommentModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        comments={comments}
+        comments={comments[item._id] || []}
         onSubmit={handleCommentSubmit}
       />
     </div>

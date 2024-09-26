@@ -20,6 +20,7 @@ const Feed = () => {
     application: true,
   });
   const [searchQuery, setSearchQuery] = useState('');
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const fetchFeedItems = async (search = '') => {
@@ -80,7 +81,7 @@ const Feed = () => {
             <Box>
               {filteredItems.map((item, index) => (
                 <Suspense fallback={<div className='load-post-splash'></div>}>
-                   <FeedItem item={item} />
+                   <FeedItem key={item._id} item={item} comments={comments} setComments={setComments} />
                 </Suspense>
                
               ))}
