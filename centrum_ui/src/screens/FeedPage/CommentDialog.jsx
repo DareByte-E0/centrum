@@ -4,7 +4,7 @@ import './commentdialog.css';
 import { FaCheck, FaTimes, FaPaperPlane } from 'react-icons/fa';
 
 
-const CommentModal = ({ isOpen, onClose, comments, onSubmit }) => {
+const CommentModal = ({ isOpen, onClose, comments, onSubmit, loading }) => {
   const [comment, setComment] = useState('');
 
   const handleSubmit = () => {
@@ -41,12 +41,19 @@ const CommentModal = ({ isOpen, onClose, comments, onSubmit }) => {
           </button>
         </div>
         <div className="comments-list">
-          {comments.map((c, index) => (
-            <div key={index} className="comment">
-              {c}
-            </div>
-          ))}
-        </div>
+                    {loading ? (
+                        <p>Loading comments...</p>
+                    ) : comments.length === 0 ? (
+                        <p>No comments yet.</p>
+                    ) : (
+                        comments.map((c) => (
+                            <div key={c._id} className="comment">
+                                <p>{c.text}</p>
+                                <span>{new Date(c.createdAt).toLocaleString()}</span>
+                            </div>
+                        ))
+                    )}
+          </div>
       </div>
     </div>
   );

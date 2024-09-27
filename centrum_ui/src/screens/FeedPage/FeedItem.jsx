@@ -1,16 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaThumbsUp, FaComment, FaUser  } from 'react-icons/fa';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import './feeditem.css';
 import CommentModal from './CommentDialog';
 import API_URL from '../../Config';
+import axios from 'axios';
 
 
-const FeedItem = ({ item, comments, setComments }) => {
+const FeedItem = ({ item, comments, setComments, likes, setLikes }) => {
   const navigate = useNavigate();
   let [textClick, setTextClick] = useState('card-desc');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [commentCount, setCommentCount] = useState(0);
+  const [loadingComments, setLoadingComments] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+
+
+  // Fetch initial comment count
+  useEffect(() => {
+    const fetchCommentCount = async () => {
+        try {
+            const response = await axios.get(`${API_URL}/get-comment/${item._id}`);
+            setCommentCount(response.data.total);
+        } catch (error) {
+            console.error("Error fetching comment count:", error);
+        }
+    };
+
+    const fetchLikeCount = async () => {
+      try {
+          const response = await axios.get(`${API_URL}/get-like/${item._id}`);
+          setLikeCount(response.data.total);
+      } catch (error) {
+          console.error("Error fetching like count:", error);
+      }
+  };
+
+    fetchCommentCount();
+    fetchLikeCount();
+}, [item._id]);
   
 
   const handleOpenDoc = (id) => {
@@ -28,12 +57,66 @@ const FeedItem = ({ item, comments, setComments }) => {
     setTextClick('card-desc')
   }
 
-  const handleCommentSubmit = (newComment) => {
-    setComments((prevComments) => ({
-      ...prevComments,
-      [item._id]: [...(prevComments[item._id] || []), newComment],
-    }));
+  const handleCommentSubmit = async (newComment) => {
+    try {
+      const response = await axios.post(`${API_URL}/post-comment`, {
+        text: newComment,
+        fileId: item._id,
+      });
+      
+      // Update comments state with the newly added comment
+      setComments((prevComments) => ({
+        ...prevComments,
+        [item._id]: [...(prevComments[item._id] || []), response.data.comment],
+      }));
+      setCommentCount((prevCount) => prevCount + 1)
+    } catch (error) {
+      console.error("Error posting comment:", error);
+    }
   };
+
+  
+  const handleLikeSubmit = async (newLike) => {
+    try {
+      const response = await axios.post(`${API_URL}/post-like`, {
+        fileId: item._id,
+      });
+      
+      // Update likes state with the newly added comment
+      setLikes((prevLikes) => ({
+        ...prevLikes,
+        [item._id]: [...(prevLikes[item._id] || []), response.data.like],
+      }));
+      setLikeCount((prevCount) => prevCount + 1)
+    } catch (error) {
+      console.error("Error posting like:", error);
+    }
+  };
+
+
+  const fetchComments = async () => {
+    try {
+      setLoadingComments(true);
+      const response = await axios.get(`${API_URL}/get-comment/${item._id}`);
+      setComments((prev) => ({
+        ...prev,
+        [item._id]: response.data.comments,
+      }));
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    } finally {
+      setLoadingComments(false);
+  }
+  };
+
+
+
+  const handleOpenModal = () => {
+    fetchComments();
+    setIsModalOpen(true);
+  };
+
+
 
 
   return (
@@ -75,10 +158,7 @@ const FeedItem = ({ item, comments, setComments }) => {
       {item.type === 'image' && (
         <div className="image-container">
           <img className="image-thumbnail" src={`${API_URL}/${item.thumbnailPath}`} alt={item.originalName} />
-          {/* <div className="overlay">
-            <h4>{item.originalName}</h4>
-            <p>{item.type}</p>
-          </div> */}
+          
         </div>
       )}
 
@@ -86,7 +166,7 @@ const FeedItem = ({ item, comments, setComments }) => {
         <div className="doc-container">
           <img className="doc-thumbnail" src={`${API_URL}/${item.thumbnailPath}`} alt={item.originalName} />
           <div className="doc-details">
-            {/* <p>{item.originalName}</p> */}
+            
             <button className="action-btn" onClick={() => handleOpenDoc(item._id)}>
               Open Document
             </button>
@@ -96,11 +176,11 @@ const FeedItem = ({ item, comments, setComments }) => {
 
       {/* Like and Comment Buttons */}
       <div className="card-actions">
-        <button className="action-btn like-btn">
-          <FaThumbsUp /> Like
+        <button className="action-btn like-btn" onClick={handleLikeSubmit}>
+          <FaThumbsUp /> {likeCount > 0 ? `${likeCount} Like(s)` :  `Like`}
         </button>
-        <button className="action-btn comment-btn" onClick={() => setIsModalOpen(true)}>
-          <FaComment /> Comment
+        <button className="action-btn comment-btn" onClick={handleOpenModal}>
+          <FaComment /> {commentCount > 0 ? ` ${commentCount} Comment(s)` : ' Comment'}
         </button>
       </div>
 
@@ -110,6 +190,7 @@ const FeedItem = ({ item, comments, setComments }) => {
         onClose={() => setIsModalOpen(false)}
         comments={comments[item._id] || []}
         onSubmit={handleCommentSubmit}
+        loading={loadingComments}
       />
     </div>
   );
