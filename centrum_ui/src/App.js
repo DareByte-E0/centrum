@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import Layout from './Layout';
 import LoadingIndicator from './screens/Loaders/loadingbar';
 import LoadingScreen from './screens/Loaders/LoadingScreen';
+import LoginPage from './screens/Authentication/Login';
 
 
 const LandingPage = lazy(() => import('./screens/HomePage/LandingPage'));
@@ -45,6 +46,7 @@ const App = () => {
           <Route path='/feed' element={<Layout><LandingFeed /></Layout>} />
           <Route path='/upload' element={<Layout><UploadPage /></Layout>} />
           <Route path='/result' element={<Layout ><SearchResults /></Layout>} />
+          <Route path='/login' element={<Layout showHeader={false}><LoginPage/></Layout>} />
           <Route path='/study' element={<Layout showHeader={false}><MainLayout /></Layout>} />
           <Route path='/profile' element={<Layout ><UserProfile user={user}/></Layout>} />
 
