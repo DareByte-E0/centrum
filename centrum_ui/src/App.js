@@ -29,11 +29,17 @@ const App = () => {
   }, [location]);
 
   const user = {
-    name: 'John Doe',
-    bio: 'Lover of coffee and technology and what ever like brings, like beacon.',
-    followers: 150,
-    following: 200,
-    profilePicture: '', 
+    name: "Dr. John Doe",
+    bio: "Professor of Computer Science at XYZ University.",
+    profilePicture: "https://example.com/profile.jpg",
+    followers: 1200,
+    following: 300,
+    researchInterests: ["Artificial Intelligence", "Machine Learning", "Data Science"],
+    achievements: ["Best Paper Award 2022", "Researcher of the Year 2021"],
+    recentActivity: [
+      { date: "2023-10-01", description: "Published a new paper on AI ethics." },
+      { date: "2023-09-25", description: "Attended the International Research Conference." },
+    ],
   };
 
   return (

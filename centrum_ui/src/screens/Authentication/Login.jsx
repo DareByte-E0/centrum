@@ -24,6 +24,13 @@ const LoginPage = () => {
               <a href="/forgot-password">Forgot Password?</a>
             </div>
           </form>
+          {/* Add a separator if you like */}
+          <div className="separator">or</div>
+          {/* Google Login Button */}
+          <button type="button" className="google-login-button">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo" className="google-logo" />
+            Login with Google
+          </button>
         </div>
       </div>
     </div>

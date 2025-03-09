@@ -113,6 +113,42 @@
   .forgot-password a:hover {
     text-decoration: underline;
   }
+
+
+
+  .google-login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #4285F4;
+    background-color: grey;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .google-login-button:hover {
+    background-color: #357ABD;
+  }
+  
+  .google-logo {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  .separator {
+    text-align: center;
+    margin: 20px 0;
+    color: #666;
+  }
+
+
   
   /* Responsive Styles */
   @media (max-width: 768px) {
