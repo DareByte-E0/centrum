@@ -6,6 +6,7 @@ import Layout from './Layout';
 import LoadingIndicator from './screens/Loaders/loadingbar';
 import LoadingScreen from './screens/Loaders/LoadingScreen';
 import LoginPage from './screens/Authentication/Login';
+import RegisterPage from './screens/Authentication/Register';
 
 
 const LandingPage = lazy(() => import('./screens/HomePage/LandingPage'));
@@ -52,7 +53,8 @@ const App = () => {
           <Route path='/feed' element={<Layout><LandingFeed /></Layout>} />
           <Route path='/upload' element={<Layout><UploadPage /></Layout>} />
           <Route path='/result' element={<Layout ><SearchResults /></Layout>} />
-          <Route path='/login' element={<Layout showHeader={false}><LoginPage/></Layout>} />
+          <Route path='/signup' element={<Layout showHeader={true} showFooter={false}><RegisterPage/></Layout>} />
+          <Route path='/login' element={<Layout showHeader={true} showFooter={false}><LoginPage/></Layout>} />
           <Route path='/study' element={<Layout showHeader={false}><MainLayout /></Layout>} />
           <Route path='/profile' element={<Layout ><UserProfile user={user}/></Layout>} />
 

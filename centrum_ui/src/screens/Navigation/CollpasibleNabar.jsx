@@ -17,7 +17,7 @@ const CollapsibleNavBar = () => {
                         <Nav.Link as={Link} to="/upload"> <FaUpload size={15} color="blue" /> upload</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item as={Link} to="/login">Login</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/signup">signup</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link className='user-icon' as={Link} to="/profile"><FaUser className='icon'/></Nav.Link>
