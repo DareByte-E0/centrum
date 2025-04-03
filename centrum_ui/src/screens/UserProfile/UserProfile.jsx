@@ -1,90 +1,109 @@
 import React from 'react';
-import './userprofile.css';
-import { FaUser, FaEnvelope, FaUserFriends, FaBook, FaAward, FaCalendarAlt } from 'react-icons/fa';
-import Circles from '../Brand/Circles';
+import { Card, CardContent, Typography, Avatar, Chip, Divider } from '@mui/material';
+import { Container } from 'react-bootstrap';
+import './profile.css';
 
-const UserProfile = ({ user }) => {
-  return (
-    <div className='profile-page'>
-      {/* <div className='brand-circle'>
-        <Circles />
-      </div> */}
-      <div className="user-profile">
-        {/* Profile Header */}
-        <div className="profile-header">
-          <div className="profile-picture">
-            {user.profilePicture ? (
-              <img src={user.profilePicture} alt={`${user.name}'s profile`} />
-            ) : (
-              <FaUser className="default-icon" />
-            )}
-          </div>
-          <div className="user-info">
-            <h2>{user.name}</h2>
-            <p>{user.bio}</p>
-            <div className="user-stats">
-              <div className="stat">
-                <FaUserFriends className="stat-icon" />
-                <span>{user.followers} Followers</span>
-                <div className="progress-bar">
-                  <div className="progress" style={{ width: `${(user.followers / 1000) * 100}%` }}></div>
-                </div>
-              </div>
-              <div className="stat">
-                <FaUserFriends className="stat-icon" />
-                <span>{user.following} Following</span>
-                <div className="progress-bar">
-                  <div className="progress" style={{ width: `${(user.following / 500) * 100}%` }}></div>
-                </div>
-              </div>
-            </div>
-            <div className="action-buttons">
-              <button className="follow-button">
-                <FaUserFriends /> Follow
-              </button>
-              <button className="message-button">
-                <FaEnvelope /> Message
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Additional Sections */}
-        <div className="profile-section">
-          <h3><FaBook /> Research Interests</h3>
-          <div className="interests">
-            {user.researchInterests.map((interest, index) => (
-              <span key={index} className="interest-tag">{interest}</span>
-            ))}
-          </div>
-        </div>
-
-        <div className="profile-section">
-          <h3><FaAward /> Achievements</h3>
-          <div className="achievements">
-            {user.achievements.map((achievement, index) => (
-              <div key={index} className="achievement">
-                <FaAward className="achievement-icon" />
-                <span>{achievement}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="profile-section">
-          <h3><FaCalendarAlt /> Recent Activity</h3>
-          <div className="activity-timeline">
-            {user.recentActivity.map((activity, index) => (
-              <div key={index} className="activity">
-                <span className="activity-date">{activity.date}</span>
-                <span className="activity-description">{activity.description}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+// Mock user data
+const user = {
+  name: "Neo_Researcher",
+  level: "Level 5 Quantum Analyst",
+  xp: 1240,
+  savedArticles: 28,
+  joined: "2023-10-15",
+  avatarText: "NR"
 };
 
-export default UserProfile;
+const recentActivity = [
+  { id: 1, action: "Saved", title: "AI Ethics Paper", time: "2h ago" },
+  { id: 2, action: "Commented", title: "Mars Terraforming", time: "5h ago" },
+  { id: 3, action: "Shared", title: "Neural Networks", time: "1d ago" },
+];
+
+function Profile() {
+  return (
+    <div className="profile-container scanlines">
+      <Container fluid className="py-4 px-4">
+        {/* Header */}
+        <Card sx={{ bgcolor: '#1B2838', color: 'white', mb: 4, borderLeft: '4px solid #F7DC6F' }}>
+          <CardContent className="d-flex align-items-center">
+            <Avatar 
+              sx={{ 
+                bgcolor: '#F7DC6F', 
+                color: '#1B2838', 
+                width: 80, 
+                height: 80, 
+                fontSize: '2rem',
+                mr: 3
+              }}
+            >
+              {user.avatarText}
+            </Avatar>
+            <div>
+              <Typography variant="h4" sx={{ fontFamily: '"Orbitron", sans-serif' }}>
+                {user.name}
+              </Typography>
+              <Typography variant="body1" sx={{ color: '#B8B8B8' }}>
+                {user.level}
+              </Typography>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Stats */}
+        <Card sx={{ bgcolor: '#1B2838', color: 'white', mb: 4 }}>
+          <CardContent>
+            <Typography variant="h6" sx={{ borderBottom: '1px solid #F7DC6F', pb: 1, mb: 2 }}>
+              RESEARCH METRICS
+            </Typography>
+            <div className="d-flex justify-content-between">
+              <div>
+                <Typography variant="body2">XP POINTS</Typography>
+                <Chip 
+                  label={user.xp} 
+                  sx={{ bgcolor: '#4CAF50', color: 'white', mt: 1 }} 
+                />
+              </div>
+              <div>
+                <Typography variant="body2">ARTICLES SAVED</Typography>
+                <Chip 
+                  label={user.savedArticles} 
+                  sx={{ bgcolor: '#2196F3', color: 'white', mt: 1 }} 
+                />
+              </div>
+              <div>
+                <Typography variant="body2">MEMBER SINCE</Typography>
+                <Typography variant="body1" sx={{ color: '#F7DC6F', mt: 1 }}>
+                  {user.joined}
+                </Typography>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Activity Feed */}
+        <Card sx={{ bgcolor: '#1B2838', color: 'white' }}>
+          <CardContent>
+            <Typography variant="h6" sx={{ borderBottom: '1px solid #F7DC6F', pb: 1, mb: 2 }}>
+              RECENT ACTIVITY
+            </Typography>
+            {recentActivity.map((activity) => (
+              <div key={activity.id} className="mb-3">
+                <div className="d-flex justify-content-between">
+                  <Typography variant="body1">
+                    <span style={{ color: '#F7DC6F' }}>{activity.action}</span>: {activity.title}
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: '#7F8C8D' }}>
+                    {activity.time}
+                  </Typography>
+                </div>
+                <Divider sx={{ bgcolor: '#2C3E50', mt: 1 }} />
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </Container>
+    </div>
+  );
+}
+
+export default Profile;

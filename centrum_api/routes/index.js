@@ -7,7 +7,9 @@ const LikeController = require('../controllers/LikeController')
 const multer = require("multer");
 
 
-const upload = multer({dest: "uploads/"});
+const upload = multer({
+    dest: 'tempuploads/' // Explicit temp directory
+  });
 
 router.get('/', AppController.get);
 router.get('/bebe', AppController.bebe);

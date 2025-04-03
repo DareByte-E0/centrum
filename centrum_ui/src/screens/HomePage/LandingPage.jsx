@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import './landing.css';
+import NewsFeed from './NewsFeed';
 
 
 const CustomSearch = lazy(() => import('./CustomSearch'));
@@ -28,7 +29,8 @@ const LandingPage = () => {
                 <Suspense fallback={<div>Loading...</div>}>
                     <CustomSearch />
                 </Suspense>
-                <div className='body-container'>
+                <NewsFeed />
+                {/* <div className='body-container'>
 
                 
                
@@ -86,7 +88,7 @@ const LandingPage = () => {
                     <div className='footer-2'>
                         Our news letter
                     </div>
-                </div>
+                </div> */}
             </div>
            
         </div>

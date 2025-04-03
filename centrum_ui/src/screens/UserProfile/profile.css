@@ -1,0 +1,70 @@
+/* ===== GLOBAL DARK THEME ===== */
+body {
+  background-color: #1B2838 !important; /* Your dark blue */
+  color: white !important;
+  margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* Force all cards/sections to use dark blue */
+.MuiCard-root, .MuiPaper-root, .MuiContainer-root {
+  background-color: #1B2838 !important;
+  color: white !important;
+}
+
+/* Remove white padding in Bootstrap containers */
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Override MUI defaults */
+.MuiTypography-root {
+  color: white !important;
+}
+
+
+/* Profile container */
+.profile-container {
+  background-color: #1B2838;
+  min-height: 100vh; /* Full height */
+}
+
+/* Fix avatar background */
+.MuiAvatar-root {
+  background-color: #F7DC6F !important;
+  color: #1B2838 !important;
+}
+
+/* Activity feed dividers */
+.MuiDivider-root {
+  background-color: #2C3E50 !important;
+}
+
+/* Stats chips */
+.MuiChip-root {
+  font-weight: bold !important;
+}
+
+
+.scanlines::before {
+  background: linear-gradient(
+    to bottom,
+    transparent 95%,
+    rgba(247, 220, 111, 0.05) 96%  /* Gold scanlines for contrast */
+  );
+}
+
+
+/* Grid background */
+.profile-container {
+  background: 
+    linear-gradient(rgba(27, 40, 56, 0.9), rgba(27, 40, 56, 0.9)),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23F7DC6F" stroke-width="0.3" stroke-dasharray="2,2"/></svg>'),
+    #1B2838;
+  background-size: 40px 40px;
+  color: white;
+}
+
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');

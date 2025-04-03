@@ -142,7 +142,7 @@ const FeedItem = ({ item, comments, setComments, likes, setLikes }) => {
 
       {item.type === 'video' && (
         <div className="video-container">
-          <video src={`${API_URL}/${item.path}`} controls width="100%"/>
+          <video src={`${item.path}`} controls width="100%"/>
           <button className="action-btn" onClick={() => handleOpenVid(item._id, item.title)}>
             Open Video
           </button>
@@ -151,20 +151,20 @@ const FeedItem = ({ item, comments, setComments, likes, setLikes }) => {
 
       {item.type === 'audio' && (
         <div className="audio-container">
-          <audio src={`${API_URL}/${item.path}`} controls width="100%" />
+          <audio src={`${item.path}`} controls width="100%" />
         </div>
       )}
 
       {item.type === 'image' && (
         <div className="image-container">
-          <img className="image-thumbnail" src={`${API_URL}/${item.thumbnailPath}`} alt={item.originalName} />
+          <img className="image-thumbnail" src={`${item.path}`} alt={item.originalName} />
           
         </div>
       )}
 
       {item.type === 'application' && (
         <div className="doc-container">
-          <img className="doc-thumbnail" src={`${API_URL}/${item.thumbnailPath}`} alt={item.originalName} />
+          <img className="doc-thumbnail" src={`${item.thumbnailPath}`} alt={item.originalName} />
           <div className="doc-details">
             
             <button className="action-btn" onClick={() => handleOpenDoc(item._id)}>

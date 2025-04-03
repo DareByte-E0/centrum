@@ -1,0 +1,38 @@
+
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
+
+/* Scanlines Effect */
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanlines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 95%,
+    rgba(255, 255, 255, 0.03) 96%
+  );
+  background-size: 100% 6px;
+  pointer-events: none;
+  z-index: 1000;
+  animation: scanline 6s linear infinite;
+}
+
+@keyframes scanline {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+/* Global Overrides */
+body {
+  background-color: #121E2B !important;
+  color: white !important;
+}

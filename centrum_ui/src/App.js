@@ -14,7 +14,7 @@ const SearchResults = lazy(() => import('./screens/GoogleResultPage/SearchResult
 const UploadPage = lazy(() => import('./screens/UploadPage/UploadPage'));
 const LandingFeed = lazy(() => import('./screens/FeedPage/LandingFeed'));
 const MainLayout = lazy(() => import('./screens/StudyPage/MainLayout'));
-const UserProfile = lazy(() => import('./screens/UserProfile/UserProfile'));
+const Profile = lazy(() => import('./screens/UserProfile/UserProfile'));
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -49,14 +49,14 @@ const App = () => {
       <LoadingIndicator loading={loading} />
       <Suspense fallback={<LoadingScreen />}>
         <Routes>
-          <Route path='/' element={<Layout><LandingPage /></Layout>} />
+          <Route path='/' element={<Layout showFooter={false}><LandingPage /></Layout>} />
           <Route path='/feed' element={<Layout><LandingFeed /></Layout>} />
           <Route path='/upload' element={<Layout><UploadPage /></Layout>} />
           <Route path='/result' element={<Layout ><SearchResults /></Layout>} />
           <Route path='/signup' element={<Layout showHeader={true} showFooter={false}><RegisterPage/></Layout>} />
           <Route path='/login' element={<Layout showHeader={true} showFooter={false}><LoginPage/></Layout>} />
           <Route path='/study' element={<Layout showHeader={false}><MainLayout /></Layout>} />
-          <Route path='/profile' element={<Layout ><UserProfile user={user}/></Layout>} />
+          <Route path='/profile' element={<Layout showFooter={false}><Profile /></Layout>} />
 
         </Routes>
       </Suspense>
